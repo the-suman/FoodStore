@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.foodstore.util.*"%>
+    pageEncoding="UTF-8" import="com.foodstore.util.*, com.foodstore.service.*, com.foodstore.service.impl.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +13,9 @@
 
 <%
 	out.println(DBUtil.getConnection());
+	
+	UserService userService = new UserServiceImpl();
+	out.println(userService.registerUser(null));
 	
 %>
 

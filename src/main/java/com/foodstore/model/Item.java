@@ -2,6 +2,8 @@ package com.foodstore.model;
 
 import java.io.Serializable;
 
+import com.foodstore.enums.FoodType;
+
 public class Item implements Serializable {
 
 	/**
@@ -11,7 +13,7 @@ public class Item implements Serializable {
 	private String itemId;
 	private String storeId;
 	private String name;
-	private String type;
+	private FoodType type;
 	private String description;
 	private Double price;
 	private Integer qty;
@@ -40,11 +42,11 @@ public class Item implements Serializable {
 		this.name = name;
 	}
 
-	public String getType() {
+	public FoodType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(FoodType type) {
 		this.type = type;
 	}
 

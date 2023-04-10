@@ -2,6 +2,8 @@ package com.foodstore.model;
 
 import java.io.Serializable;
 
+import com.foodstore.enums.OrderStatus;
+
 public class OrderDetails implements Serializable {
 
 	/**
@@ -14,7 +16,7 @@ public class OrderDetails implements Serializable {
 	private String paymentId;
 	private Double totalDiscount;
 	private Double totalAmount;
-	private String orderStatus;
+	private OrderStatus orderStatus;
 
 	public String getOrderId() {
 		return orderId;
@@ -56,11 +58,11 @@ public class OrderDetails implements Serializable {
 		this.totalAmount = totalAmount;
 	}
 
-	public String getOrderStatus() {
+	public OrderStatus getOrderStatus() {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(String orderStatus) {
+	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = orderStatus;
 	}
 
