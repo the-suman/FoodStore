@@ -11,13 +11,13 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="x" %>
 
-<%
+<%-- <%
 	out.println(DBUtil.getConnection());
 	
 	UserService userService = new UserServiceImpl();
 	out.println(userService.registerUser(null));
 	
-%>
+%> --%>
 
 <%-- <x:if test="${isLoggedIn}">
 	<%@ include file="home.jsp" %>
