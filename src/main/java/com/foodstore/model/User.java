@@ -53,7 +53,7 @@ public class User implements Serializable {
 		return mob;
 	}
 
-	public void setMob(long mob) {
+	public void setMob(Long mob) {
 		this.mob = mob;
 	}
 

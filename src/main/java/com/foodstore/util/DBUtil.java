@@ -37,6 +37,14 @@ public class DBUtil {
 	public static Connection getConnection() throws FoodException {
 		if (con == null)
 			throw new FoodException(ResponseCode.DATABASE_CONNECTION_FAILURE);
+		try {
+			con.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return con;
 	}
+	
+	
 }

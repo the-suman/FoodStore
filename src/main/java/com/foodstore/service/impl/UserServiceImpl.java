@@ -2,9 +2,11 @@ package com.foodstore.service.impl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.foodstore.enums.ResponseCode;
+import com.foodstore.enums.Role;
 import com.foodstore.exception.FoodException;
 import com.foodstore.model.User;
 import com.foodstore.service.UserService;
@@ -13,7 +15,7 @@ import com.foodstore.util.DBUtil;
 public class UserServiceImpl implements UserService {
 
 	@Override
-	public String registerUser(User user) throws FoodException {
+	public String registerUser(User user, Role role) throws FoodException {
 		// Take the variable responseMessage to return as response
 		String responseMessage = ResponseCode.FAILURE.toString();
 
@@ -21,10 +23,11 @@ public class UserServiceImpl implements UserService {
 		Connection connection = DBUtil.getConnection();
 
 		// Write the query to insert the user into the user database
-		String query = "insert into user values(?,?,?,?,?,?,?)";
+		String query = "INSERT INTO USER VALUES(?,?,?,?,?,?,?)";
 
 		// Create the prepared statement object
 		try {
+			connection.setAutoCommit(false);
 			PreparedStatement ps = connection.prepareStatement(query);
 
 			// Update the ? values in the query
@@ -40,13 +43,30 @@ public class UserServiceImpl implements UserService {
 
 			int result = ps.executeUpdate();
 			if (result > 0) {
-				responseMessage = "SUCCESS";
+				String query2 = "INSERT INTO USER_ROLES VALUES(?,?)";
+				PreparedStatement ps2 = connection.prepareStatement(query2);
+				ps2.setString(1, user.getUserId());
+				ps2.setString(2, role.toString().toUpperCase());
+				int result2 = ps2.executeUpdate();
+				if (result2 > 0) {
+					responseMessage = "SUCCESS";
+					connection.commit();
+				} else {
+					connection.rollback();
+				}
+			} else {
+				connection.rollback();
 			}
-
 		} catch (SQLException e) {
 
 			// Update the response Message with error message if exists
 			responseMessage += " : " + e.getMessage();
+			try {
+				connection.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
 		}
 
 		// Return the response Message
@@ -54,16 +74,66 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public User loginUser(String userId, String password) throws FoodException {
-		// TODO Auto-generated method stub
-		return null;
+	public User loginUser(String userId, String password, Role role) throws FoodException {
+		User user = null;
+		String query = "select * from user inner join user_roles on user.userId = user_roles.userId where user.userId = ?  AND PASSWORD=? and role=?";
+
+		try {
+			Connection connection = DBUtil.getConnection();
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, userId);
+			ps.setString(2, password);
+			ps.setString(3, role.toString().toUpperCase());
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				user = new User();
+				user.setfName(rs.getString("fname"));
+				user.setlName(rs.getString("lname"));
+				user.setAddressId(rs.getString("address"));
+				user.setEmail(rs.getString("email"));
+				user.setPassword(rs.getString("password"));
+				user.setMob(rs.getLong("mob"));
+				user.setUserId(rs.getString("userId"));
+
+			} else {
+				throw new FoodException(ResponseCode.UNAUTHORIZED);
+			}
+			ps.close();
+		} catch (SQLException | FoodException e) {
+			System.out.println(e.getMessage());
+			throw new FoodException(e.getMessage());
+		}
+		return user;
 	}
 
 	@Override
-	public User getUserById(String userId) {
-		// TODO Auto-generated method stub
+	public User getUserById(String userId) throws FoodException {
+		User user = null;
+		String query = "SELECT * FROM USER WHERE USERID = ?";
+		try {
+			Connection connection = DBUtil.getConnection();
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, userId);
 
-		return null;
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				user = new User();
+				user.setfName(rs.getString("fname"));
+				user.setlName(rs.getString("lname"));
+				user.setAddressId(rs.getString("address"));
+				user.setEmail(rs.getString("email"));
+				user.setPassword(rs.getString("password"));
+				user.setMob(rs.getLong("mob"));
+				user.setUserId(rs.getString("userId"));
+			} else {
+				throw new FoodException(ResponseCode.UNAUTHORIZED);
+			}
+			ps.close();
+		} catch (SQLException | FoodException e) {
+			System.out.println(e.getMessage());
+			throw new FoodException(e.getMessage());
+		}
+		return user;
+
 	}
-
 }
