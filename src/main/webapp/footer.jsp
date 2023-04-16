@@ -11,16 +11,16 @@ footer{
 	width:100%;
 	height:60px;   /* Height of the footer */
 	margin-top:-60px;
-	background:#6cf;
+	background:#ffb814;
 }
 </style>
 </head>
 <body>
 	<footer>
 		<div class="text-center p-4"
-			style="background-color: rgba(0, 0, 0, 0.05);">
+			style="background-color: rgba(20, 20, 20, 0.05);">
 			Copyright © <a class="text-reset fw-bold"
-				href="#">Bitter Code</a> [ 2023 ]
+				href="#">FoodKart</a> [ 2023 ]
 		</div>
 	</footer>
 </body>
