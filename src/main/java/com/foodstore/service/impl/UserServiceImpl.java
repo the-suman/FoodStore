@@ -89,7 +89,7 @@ public class UserServiceImpl implements UserService {
 				user = new User();
 				user.setfName(rs.getString("fname"));
 				user.setlName(rs.getString("lname"));
-				user.setAddressId(rs.getString("address"));
+				user.setAddressId(rs.getString("addressId"));
 				user.setEmail(rs.getString("email"));
 				user.setPassword(rs.getString("password"));
 				user.setMob(rs.getLong("mob"));

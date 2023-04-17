@@ -22,6 +22,7 @@ body {
 }
 </style>
 <body>
+	<%@ include file="header.jsp"%>
 	<div class="container mt-5 align-center">
 		<div class="row centered-form">
 			<div class="col-xs-12 col-sm-8 offset-sm-2 col-md-6 offset-md-3">
@@ -30,7 +31,7 @@ body {
 						<h3 class=" text-center panel-title">Registration Form</h3>
 					</div>
 					<div class="panel-body">
-						<form role="form">
+						<form role="form" action="register" method="post">
 							<div class="row mb-2 px-2">
 								<div class="col-xs-6 col-sm-6 col-md-6">
 									<div class="form-group">
@@ -77,6 +78,7 @@ body {
 			</div>
 		</div>
 	</div>
+	<%@ include file="footer.jsp"%>
 	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -12,6 +12,10 @@
 	<%
 	boolean isLoggedInAsCustomer = FoodUtil.isLoggedIn(request, Role.CUSTOMER);
 	boolean isLoggedInAsAdmin = FoodUtil.isLoggedIn(request, Role.ADMIN);
+	request.setAttribute("isLoggedInAsCustomer", isLoggedInAsCustomer);
+	request.setAttribute("isLoggedInAsAdmin", isLoggedInAsAdmin);
+	System.out.println(isLoggedInAsCustomer);
+	
 	%>
 
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -20,7 +24,7 @@
 		<c:when test="${isLoggedInAsCustomer}">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 				<div class="container-fluid">
-					<a class="navbar-brand "> <img src="logo.png"
+					<a class="navbar-brand " href="index.jsp"> <img src="logo.png" 
 						class="border-radius: 10px" height="50" width="130" />
 					</a>
 					<button class="navbar-toggler" type="button"
@@ -46,7 +50,8 @@
 						&nbsp;
 						<div class="d-grid gap-2 d-md-block">
 							<button class="btn btn-secondary fw-bold" type="button">Profile</button>
-							<button class="btn btn-secondary fw-bold" type="button">Logout</button>
+							<button class="btn btn-secondary fw-bold"
+								onclick="location.href='logout'" type="button">Logout</button>
 						</div>
 					</div>
 				</div>
@@ -56,7 +61,7 @@
 		<c:when test="${isLoggedInAsAdmin}">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 				<div class="container-fluid">
-					<a class="navbar-brand "> <img src="logo.png"
+					<a class="navbar-brand " href="index.jsp"> <img src="logo.png"
 						class="border-radius: 10px" height="50" width="130" />
 					</a>
 					<button class="navbar-toggler" type="button"
@@ -82,7 +87,8 @@
 						&nbsp;
 						<div class="d-grid gap-2 d-md-block">
 							<button class="btn btn-secondary fw-bold" type="button">Profile</button>
-							<button class="btn btn-secondary fw-bold" type="button">Logout</button>
+							<button class="btn btn-secondary fw-bold"
+								onclick="location.href='logout'" type="button">Logout</button>
 						</div>
 					</div>
 				</div>
@@ -90,9 +96,9 @@
 
 		</c:when>
 		<c:otherwise>
-			<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 				<div class="container-fluid">
-					<a class="navbar-brand "> <img src="logo.png"
+					<a class="navbar-brand " href="index.jsp"> <img src="logo.png"
 						style="border-radius: 10px" height="50" width="130" />
 					</a>
 					<button class="navbar-toggler" type="button"
@@ -113,8 +119,8 @@
 						</form>
 						&nbsp;
 						<div class="d-grid gap-2 d-md-block">
-							<button class="btn btn-secondary fw-bold" type="button">Login</button>
-							<button class="btn btn-secondary fw-bold" type="button">Sign
+							<button class="btn btn-secondary fw-bold" onclick="location.href='login.jsp'" type="button">Login</button>
+							<button class="btn btn-secondary fw-bold" onclick="location.href='register.jsp'" type="button">Sign
 								Up</button>
 						</div>
 					</div>

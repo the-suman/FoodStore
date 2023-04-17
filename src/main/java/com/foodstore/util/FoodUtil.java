@@ -55,6 +55,7 @@ public class FoodUtil {
 
 			// set the responseCode to success
 			responseCode = ResponseCode.SUCCESS.toString();
+			System.out.println("Login Success");
 
 		} catch (FoodException e) {
 			responseCode += " : " + e.getMessage();

@@ -19,10 +19,11 @@ body {
 </head>
 
 <body>
-	<%@ include file="header2.jsp"%>
-
+	<%-- <%@ include file="header.jsp"%> --%>
+	
+	<jsp:include page="header.jsp" flush="true"/>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="x"%>
-	<%
+	<%-- <%
 	out.println("REquest"+ request);
 	Cookie cookie = new Cookie("sessionIdForCUSTOMER" , "123456789");
 
@@ -31,8 +32,7 @@ body {
 
 	// add the cookie to the response
 	response.addCookie(cookie);
-	%>
-	<%@ include file="loginForm.jsp"%>
+	%> --%>
 
 	<%-- <%@ include file="register.jsp" %> 
  --%>
