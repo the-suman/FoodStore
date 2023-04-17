@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Header1</title>
 <link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	href="bootstrap/css/bootstrap.min.css"
 	rel="stylesheet">
 </head>
 
@@ -35,12 +35,12 @@
 				&nbsp;
 				<div class="d-grid gap-2 d-md-block">
 					<button class="btn btn-secondary fw-bold" type="button">Login</button>
-					<button class="btn btn-secondary fw-bold" type="button">Signup</button>
+					<button class="btn btn-secondary fw-bold" type="button">Sign Up</button>
 				</div>
 			</div>
 		</div>
 	</nav>
 	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+		src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

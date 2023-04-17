@@ -23,10 +23,10 @@ public class FoodUtil {
 	}
 
 	public static Optional<String> readCookie(HttpServletRequest request, String key) {
-		Cookie[] cookies = request.getCookies();
-		if (cookies == null) {
+		if (request == null || request.getCookies() == null) {
 			return Optional.empty();
 		}
+		Cookie[] cookies = request.getCookies();
 		return Arrays.stream(cookies).filter(c -> key.equals(c.getName())).map(Cookie::getValue).findAny();
 	}
 

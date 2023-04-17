@@ -5,9 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Register</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <style>
 body {
@@ -79,7 +77,6 @@ body {
 			</div>
 		</div>
 	</div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
