@@ -6,25 +6,47 @@
 <meta charset="UTF-8">
 <title>Footer</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<style>
-footer {
-	position: fixed;
-	bottom: 0;
-	width: 100%;
-	height: 60px; /* Height of the footer */
-	margin-top: -60px;
-	background: #ffb814;
-}
-</style>
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <body>
-	<footer>
-		<div class="text-center p-4"
-			style="background-color: rgba(20, 20, 20, 0.05);">
-			Copyright © <a class="text-reset fw-bold" href="#">FoodKart</a> [
-			2023 ]
-		</div>
-	</footer>
+	<div class="mt-5">
+
+		<footer class="text-center text-lg-start"
+			style="background-color: #db6930;">
+			<div class="container d-flex justify-content-center py-5">
+				<button type="button"
+					class="btn btn-primary btn-lg btn-floating mx-2"
+					style="background-color: #54456b;">
+					<i class="fab fa-facebook-f"></i>
+				</button>
+				<button type="button"
+					class="btn btn-primary btn-lg btn-floating mx-2"
+					style="background-color: #54456b;">
+					<i class="fab fa-youtube"></i>
+				</button>
+				<button type="button"
+					class="btn btn-primary btn-lg btn-floating mx-2"
+					style="background-color: #54456b;">
+					<i class="fab fa-instagram"></i>
+				</button>
+				<button type="button"
+					class="btn btn-primary btn-lg btn-floating mx-2"
+					style="background-color: #54456b;">
+					<i class="fab fa-twitter"></i>
+				</button>
+			</div>
+
+			<!-- Copyright -->
+			<div class="text-center text-white p-3"
+				style="background-color: rgba(0, 0, 0, 0.2);">
+				Copyright © <a class="text-white" href="index.jsp">FoodKart.com</a>
+				2023
+			</div>
+			<!-- Copyright -->
+		</footer>
+
+	</div>
+	<!-- End of .container -->
 	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

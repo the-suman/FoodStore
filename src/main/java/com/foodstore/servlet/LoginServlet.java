@@ -1,9 +1,7 @@
 package com.foodstore.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,16 +30,13 @@ public class LoginServlet extends HttpServlet {
 		String userType = req.getParameter("usertype");
 		String rememberMe = req.getParameter("rememberme");
 		System.out.println(rememberMe);
-		PrintWriter pw = res.getWriter();
 		res.setContentType("text/html");
 		String statusMessage = FoodUtil.login(req, res, Role.valueOf(userType), userName, passWord);
 
 		if (statusMessage.equalsIgnoreCase(ResponseCode.SUCCESS.toString())) {
 			res.sendRedirect("index.jsp");
 		} else {
-			RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
-			rd.include(req, res);
-			pw.println(statusMessage);
+			res.sendRedirect("login.jsp?errorMessage=" + statusMessage);
 		}
 	}
 }

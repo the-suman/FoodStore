@@ -22,28 +22,9 @@ body {
 	<%-- <%@ include file="header.jsp"%> --%>
 	
 	<jsp:include page="header.jsp" flush="true"/>
-	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="x"%>
-	<%-- <%
-	out.println("REquest"+ request);
-	Cookie cookie = new Cookie("sessionIdForCUSTOMER" , "123456789");
-
-	// set the max age for the cookie
-	cookie.setMaxAge(600); // Expires after 10 MIN
-
-	// add the cookie to the response
-	response.addCookie(cookie);
-	%> --%>
-
-	<%-- <%@ include file="register.jsp" %> 
- --%>
-
-	<%-- <x:if test="${isLoggedIn}">
-	<%@ include file="home.jsp" %>
-</x:if>
-<x:if test="${!isLoggedIn}">
-	<%@ include file="loginForm.jsp" %>
-</x:if>
- --%>
+		
+	<label style="min-height:800px;">User Home</label>
+	
 
 	<%@ include file="footer.jsp"%>
 	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>

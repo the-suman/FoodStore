@@ -58,7 +58,7 @@ public class FoodUtil {
 			System.out.println("Login Success");
 
 		} catch (FoodException e) {
-			responseCode += " : " + e.getMessage();
+			responseCode = e.getMessage();
 		}
 
 		return responseCode;
