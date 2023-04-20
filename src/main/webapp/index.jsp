@@ -13,7 +13,6 @@
 body {
 	background-image: url('cake.jpg');
 	background-size: cover;
-	height: 1000px;
 }
 </style>
 </head>
@@ -24,7 +23,6 @@ body {
 	<jsp:include page="header.jsp" flush="true"/>
 		
 	<label style="min-height:800px;">User Home</label>
-	
 
 	<%@ include file="footer.jsp"%>
 	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>

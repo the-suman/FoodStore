@@ -26,6 +26,12 @@ body {
 						class="bordered rounded shadow-sm py-1 d-inline px-3 bg-secondary">LOGIN
 						TO FOODKART</span>
 				</div>
+				<!-- Show Success Message -->
+				<c:if test="${not empty param.successMessage}">
+					<div class="text-center my-3 ">
+						<label class="text-success"><%=request.getParameter("successMessage")%></label>
+					</div>
+				</c:if>
 				<form action="login" method="post">
 					<!-- Email input -->
 					<div class="form-outline my-3">

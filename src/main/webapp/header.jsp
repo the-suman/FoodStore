@@ -36,7 +36,7 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
-									type="button">Menu</button></li>
+									type="button" onclick="location.href='items.jsp'">Menu</button></li>
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
 									type="button">Restaurant</button></li>
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
@@ -49,7 +49,7 @@
 						</form>
 						&nbsp;
 						<div class="d-grid gap-2 d-md-block">
-							<button class="btn btn-secondary fw-bold" type="button">Profile</button>
+							<button class="btn btn-secondary fw-bold" type="button" onclick="location.href='profile.jsp'">Profile</button>
 							<button class="btn btn-secondary fw-bold"
 								onclick="location.href='logout'" type="button">Logout</button>
 						</div>
@@ -86,7 +86,7 @@
 						</form>
 						&nbsp;
 						<div class="d-grid gap-2 d-md-block">
-							<button class="btn btn-secondary fw-bold" type="button">Profile</button>
+							<button class="btn btn-secondary fw-bold" type="button" onclick="location.href='profile.jsp'">Profile</button>
 							<button class="btn btn-secondary fw-bold"
 								onclick="location.href='logout'" type="button">Logout</button>
 						</div>

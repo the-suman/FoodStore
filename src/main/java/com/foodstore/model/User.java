@@ -2,6 +2,7 @@ package com.foodstore.model;
 
 import java.io.Serializable;
 
+
 public class User implements Serializable {
 
 	/**
@@ -16,7 +17,7 @@ public class User implements Serializable {
 	private Long mob;
 	private String email;
 	private String password;
-
+	
 	public String getUserId() {
 		return userId;
 	}
