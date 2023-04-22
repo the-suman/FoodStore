@@ -41,13 +41,14 @@
 									type="button">Restaurant</button></li>
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
 									type="button">About Us</button></li>
-							<li class="nav-item"><i
-								class="fa fa-shopping-cart pl-2 pt-2"
-								style="font-size: 21px; color: white"></i> <span
-								class='badge badge-warning'
-								style='font-size: 12px; background: #ff0000; color: #fff; padding: 0 5px; vertical-align: top; margin-left: -11px;'>
-									1 </span>
-							</li>
+							<li class="nav-item"><button class="btn btn-dark fw-bold"
+									type="button">
+									<i class="fa fa-shopping-cart"
+										style="font-size: 21px;"></i> <span
+										class='badge badge-warning'
+										style='font-size: 12px; background: #ff0000; color: #fff; padding: 0 5px; vertical-align: top; margin-left: -11px;'>
+										1 </span>
+								</button></li>
 						</ul>
 						<form class="d-flex">
 							<input class="form-control me-2" type="search"
