@@ -86,6 +86,7 @@ public class FoodUtil {
 
 	public static void validateUserPageAccess(HttpServletRequest request, Role userRole) throws FoodException {
 		if (!isLoggedIn(request, userRole)) {
+			request.getSession().removeAttribute("currentpage");
 			throw new FoodException(ResponseCode.SESSION_EXPIRED);
 		}
 	}
