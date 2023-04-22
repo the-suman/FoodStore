@@ -28,7 +28,7 @@
 	<jsp:include page="header.jsp" flush="true" />
 
 	<%
-	User user = FoodUtil.getCurrentCustomer(request);
+	User user = FoodUtil.getCurrentUser(request);
 	%>
 
 	<div class="container-fluid bg-secondary">

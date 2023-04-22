@@ -38,7 +38,8 @@ public class FoodUtil {
 			User user = userService.loginUser(username, password, userRole);
 
 			// Add the user details to the ServletContext with key as role name
-			request.getSession().setAttribute(userRole.toString(), user);
+			request.getSession().setAttribute("USER", user);
+			request.getSession().setAttribute("ROLE", userRole.toString());
 
 			// Store the user firstName and mailId in the http session
 			request.getSession().setAttribute("uname", user.getfName());
@@ -55,7 +56,6 @@ public class FoodUtil {
 
 			// set the responseCode to success
 			responseCode = ResponseCode.SUCCESS.toString();
-			System.out.println("Login Success");
 
 		} catch (FoodException e) {
 			responseCode = e.getMessage();
@@ -69,7 +69,7 @@ public class FoodUtil {
 		return sessionId != null && sessionId.isPresent();
 	}
 
-	public static boolean logout(HttpServletResponse response) {
+	public static boolean logout(HttpServletRequest request, HttpServletResponse response) {
 
 		// Set the max age to 0 for the admiN and customer cookies
 		Cookie cookie = new Cookie("sessionIdFor" + Role.ADMIN.toString(), UUID.randomUUID().toString());
@@ -81,6 +81,8 @@ public class FoodUtil {
 		response.addCookie(cookie);
 		response.addCookie(cookie2);
 
+		// delete everything from the session
+		request.getSession().invalidate();
 		return true;
 	}
 
@@ -92,7 +94,7 @@ public class FoodUtil {
 	}
 
 	public static void validateCommonPageAccess(HttpServletRequest request) throws FoodException {
-		if (!isLoggedIn(request, Role.ADMIN) && !isLoggedIn(request, Role.CUSTOMER)) {
+		if (!isLoggedIn(request, getCurrentUserRole(request))) {
 			throw new FoodException(ResponseCode.SESSION_EXPIRED);
 		}
 	}
@@ -105,11 +107,11 @@ public class FoodUtil {
 		return (String) request.getSession().getAttribute("userid");
 	}
 
-	public static User getCurrentCustomer(HttpServletRequest request) {
-		return (User) request.getSession().getAttribute(Role.CUSTOMER.toString());
+	public static Role getCurrentUserRole(HttpServletRequest request) {
+		return Role.valueOf((String) request.getSession().getAttribute("ROLE"));
 	}
 
-	public static User getCurrentAdmin(HttpServletRequest request) {
-		return (User) request.getSession().getAttribute(Role.ADMIN.toString());
+	public static User getCurrentUser(HttpServletRequest request) {
+		return (User) request.getSession().getAttribute("USER");
 	}
 }

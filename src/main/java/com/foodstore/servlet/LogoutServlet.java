@@ -26,7 +26,7 @@ public class LogoutServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
 		PrintWriter pw = res.getWriter();
 		res.setContentType("text/html");
-		boolean statusMessage = FoodUtil.logout(res);
+		boolean statusMessage = FoodUtil.logout(req, res);
 
 		if (statusMessage) {
 			pw.println("Logout Success");
