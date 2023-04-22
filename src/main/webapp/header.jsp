@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Header Menu</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <body>
 	<%
@@ -15,7 +16,6 @@
 	request.setAttribute("isLoggedInAsCustomer", isLoggedInAsCustomer);
 	request.setAttribute("isLoggedInAsAdmin", isLoggedInAsAdmin);
 	System.out.println(isLoggedInAsCustomer);
-	
 	%>
 
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -24,7 +24,7 @@
 		<c:when test="${isLoggedInAsCustomer}">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 				<div class="container-fluid">
-					<a class="navbar-brand " href="index.jsp"> <img src="logo.png" 
+					<a class="navbar-brand " href="index.jsp"> <img src="logo.png"
 						class="border-radius: 10px" height="50" width="130" />
 					</a>
 					<button class="navbar-toggler" type="button"
@@ -41,6 +41,13 @@
 									type="button">Restaurant</button></li>
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
 									type="button">About Us</button></li>
+							<li class="nav-item"><i
+								class="fa fa-shopping-cart pl-2 pt-2"
+								style="font-size: 21px; color: white"></i> <span
+								class='badge badge-warning'
+								style='font-size: 12px; background: #ff0000; color: #fff; padding: 0 5px; vertical-align: top; margin-left: -11px;'>
+									1 </span>
+							</li>
 						</ul>
 						<form class="d-flex">
 							<input class="form-control me-2" type="search"
@@ -49,7 +56,8 @@
 						</form>
 						&nbsp;
 						<div class="d-grid gap-2 d-md-block">
-							<button class="btn btn-secondary fw-bold" type="button" onclick="location.href='profile.jsp'">Profile</button>
+							<button class="btn btn-secondary fw-bold" type="button"
+								onclick="location.href='profile.jsp'">Profile</button>
 							<button class="btn btn-secondary fw-bold"
 								onclick="location.href='logout'" type="button">Logout</button>
 						</div>
@@ -86,7 +94,8 @@
 						</form>
 						&nbsp;
 						<div class="d-grid gap-2 d-md-block">
-							<button class="btn btn-secondary fw-bold" type="button" onclick="location.href='profile.jsp'">Profile</button>
+							<button class="btn btn-secondary fw-bold" type="button"
+								onclick="location.href='profile.jsp'">Profile</button>
 							<button class="btn btn-secondary fw-bold"
 								onclick="location.href='logout'" type="button">Logout</button>
 						</div>
@@ -119,8 +128,10 @@
 						</form>
 						&nbsp;
 						<div class="d-grid gap-2 d-md-block">
-							<button class="btn btn-secondary fw-bold" onclick="location.href='login.jsp'" type="button">Login</button>
-							<button class="btn btn-secondary fw-bold" onclick="location.href='register.jsp'" type="button">Sign
+							<button class="btn btn-secondary fw-bold"
+								onclick="location.href='login.jsp'" type="button">Login</button>
+							<button class="btn btn-secondary fw-bold"
+								onclick="location.href='register.jsp'" type="button">Sign
 								Up</button>
 						</div>
 					</div>
