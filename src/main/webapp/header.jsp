@@ -24,7 +24,7 @@
 		<c:when test="${isLoggedInAsCustomer}">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 				<div class="container-fluid">
-					<a class="navbar-brand " href="index.jsp"> <img src="logo.png"
+					<a class="navbar-brand " href="index.jsp"> <img src="img/logo.png"
 						class="border-radius: 10px" height="50" width="130" />
 					</a>
 					<button class="navbar-toggler" type="button"
@@ -41,7 +41,7 @@
 									type="button">Restaurant</button></li>
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
 									type="button">About Us</button></li>
-							<li class="nav-item"><button class="btn btn-dark fw-bold"
+							<li class="nav-item"><button class="btn btn-dark fw-bold" onclick="location.href='cart.jsp'"
 									type="button">
 									<i class="fa fa-shopping-cart"
 										style="font-size: 21px;"></i> <span
@@ -70,7 +70,7 @@
 		<c:when test="${isLoggedInAsAdmin}">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 				<div class="container-fluid">
-					<a class="navbar-brand " href="index.jsp"> <img src="logo.png"
+					<a class="navbar-brand " href="index.jsp"> <img src="img/logo.png"
 						class="border-radius: 10px" height="50" width="130" />
 					</a>
 					<button class="navbar-toggler" type="button"
@@ -108,7 +108,7 @@
 		<c:otherwise>
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 				<div class="container-fluid">
-					<a class="navbar-brand " href="index.jsp"> <img src="logo.png"
+					<a class="navbar-brand " href="index.jsp"> <img src="img/logo.png"
 						style="border-radius: 10px" height="50" width="130" />
 					</a>
 					<button class="navbar-toggler" type="button"

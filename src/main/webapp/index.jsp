@@ -11,7 +11,7 @@
 
 <style>
 body {
-	background-image: url('cake.jpg');
+	background-image: url('img/cake.jpg');
 	background-size: cover;
 }
 </style>
