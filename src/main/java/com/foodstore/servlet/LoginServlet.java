@@ -33,8 +33,13 @@ public class LoginServlet extends HttpServlet {
 		res.setContentType("text/html");
 		String statusMessage = FoodUtil.login(req, res, Role.valueOf(userType), userName, passWord);
 
+		String pagename = (String) req.getSession().getAttribute("currentpage");
+		if (pagename == null) {
+			pagename = "index.jsp";
+		}
+
 		if (statusMessage.equalsIgnoreCase(ResponseCode.SUCCESS.toString())) {
-			res.sendRedirect("index.jsp");
+			res.sendRedirect(pagename);
 		} else {
 			res.sendRedirect("login.jsp?errorMessage=" + statusMessage);
 		}

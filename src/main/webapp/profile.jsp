@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" import="com.foodstore.util.*"
+	pageEncoding="UTF-8"
+	import="com.foodstore.util.*, com.foodstore.enums.*"
 	import="com.foodstore.model.*"%>
 <!DOCTYPE html>
 <html>
@@ -15,10 +16,21 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 <body>
+	<!--  Set the current page name and validate the user role-->
+	<%
+	String uri = request.getRequestURI();
+	String pagename = uri.substring(uri.lastIndexOf("/") + 1);
+	session.setAttribute("currentpage", pagename);
+	FoodUtil.validateCommonPageAccess(request);
+	%>
+
+	<!--  Include the header to the page -->
 	<jsp:include page="header.jsp" flush="true" />
+
 	<%
 	User user = FoodUtil.getCurrentCustomer(request);
 	%>
+
 	<div class="container-fluid bg-secondary">
 		<div class="row">
 			<div class="col">
@@ -168,6 +180,8 @@
 			</div>
 		</div>
 	</div>
+
+	<!--  Include the footer to the page-->
 	<%@ include file="footer.jsp"%>
 	<script
 		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>

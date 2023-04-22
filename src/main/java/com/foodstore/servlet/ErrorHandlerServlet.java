@@ -1,10 +1,8 @@
 package com.foodstore.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.Optional;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,8 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.foodstore.enums.ResponseCode;
 import com.foodstore.exception.FoodException;
-
-
 
 public class ErrorHandlerServlet extends HttpServlet {
 
@@ -23,7 +19,6 @@ public class ErrorHandlerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	public void service(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
-		PrintWriter pw = res.getWriter();
 		res.setContentType("text/html");
 
 		// Fetch the exceptions
@@ -42,17 +37,24 @@ public class ErrorHandlerServlet extends HttpServlet {
 			errorCode = errorCodes.get().name();
 		}
 
-		if (throwable != null && throwable instanceof FoodException) {
-			FoodException trainException = (FoodException) throwable;
-			if (trainException != null) {
-				errorMessage = trainException.getMessage();
-				statusCode = trainException.getStatusCode();
-				errorCode = trainException.getErrorCode();
-				trainException.printStackTrace();
+		if (throwable != null) {
+			FoodException foodException = null;
+			if (throwable instanceof FoodException) {
+				foodException = (FoodException) throwable;
 			}
-		} else if (throwable != null) {
-			errorMessage = throwable.getMessage();
-			errorCode = throwable.getLocalizedMessage();
+			if (throwable.getCause() instanceof FoodException) {
+				foodException = (FoodException) throwable.getCause();
+			}
+			if (foodException != null) {
+				errorMessage = foodException.getMessage();
+				statusCode = foodException.getStatusCode();
+				errorCode = foodException.getErrorCode();
+				foodException.printStackTrace();
+			} else {
+				errorMessage = throwable.getMessage();
+				errorCode = throwable.getLocalizedMessage();
+			}
+
 		}
 
 		System.out.println("======ERROR TRIGGERED========");
@@ -64,17 +66,12 @@ public class ErrorHandlerServlet extends HttpServlet {
 		System.out.println("=============================");
 
 		if (statusCode == 401) {
-			RequestDispatcher rd = req.getRequestDispatcher("login.jsp");
-			rd.include(req, res);
-			pw.println("<div class='tab'><p1 class='menu'>" + errorMessage + "</p1></div>");
+			req.getRequestDispatcher("login.jsp?errorMessage=" + errorMessage).forward(req, res);
+			return;
 
 		} else {
-			RequestDispatcher rd = req.getRequestDispatcher("error.jsp");
-			rd.include(req, res);
-			pw.println("<div style='margin-top:20%; text-align:center;'>\r\n"
-					+ "	<p class=\"menu\" style='color:red'>" + errorCode + "</p><br>\r\n" + "	<p class=\"menu\">"
-					+ errorMessage + "</p>\r\n" + "  </div>");
-
+			req.getRequestDispatcher("error.jsp?errorMessage=" + errorMessage).forward(req, res);
+			return;
 		}
 
 	}

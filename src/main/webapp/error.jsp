@@ -1,15 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isErrorPage="true"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Error Page</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 
-	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+	<%@ include file="header.jsp"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
+	<div class="text-center" style="min-height: 400px;">
+		<!-- Show Error Message -->
+		<c:if test="${not empty param.errorCode}">
+			<div class="text-center my-3 ">
+				<label class="text-danger"><%=request.getParameter("errorCode")%></label>
+			</div>
+		</c:if>
+
+		<c:choose>
+			<c:when test="${not empty param.errorMessage}">
+				<div class="text-center my-3 ">
+					<label class="text-danger"><%=request.getParameter("errorMessage")%></label>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="text-center my-3 ">
+					<label class="text-danger">Something Went Wrong!!</label>
+				</div>
+			</c:otherwise>
+		</c:choose>
+
+	</div>
+
+	<%@ include file="footer.jsp"%>
 </body>
 </html>

@@ -18,11 +18,10 @@ body {
 </head>
 
 <body>
-	<%-- <%@ include file="header.jsp"%> --%>
-	
-	<jsp:include page="header.jsp" flush="true"/>
-		
-	<label style="min-height:800px;">User Home</label>
+
+	<jsp:include page="header.jsp" flush="true" />
+
+	<label style="min-height: 800px;">User Home</label>
 
 	<%@ include file="footer.jsp"%>
 	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>

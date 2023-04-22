@@ -71,7 +71,7 @@ public class FoodUtil {
 
 	public static boolean logout(HttpServletResponse response) {
 
-		// Set the max age to 0 for the admin and customer cookies
+		// Set the max age to 0 for the admiN and customer cookies
 		Cookie cookie = new Cookie("sessionIdFor" + Role.ADMIN.toString(), UUID.randomUUID().toString());
 		cookie.setMaxAge(0);
 
@@ -84,21 +84,31 @@ public class FoodUtil {
 		return true;
 	}
 
-	public static void validateUserAuthorization(HttpServletRequest request, Role userRole) throws FoodException {
+	public static void validateUserPageAccess(HttpServletRequest request, Role userRole) throws FoodException {
 		if (!isLoggedIn(request, userRole)) {
 			throw new FoodException(ResponseCode.SESSION_EXPIRED);
 		}
 	}
 
-	public static String getCurrentUserName(HttpServletRequest req) {
-		return (String) req.getSession().getAttribute("uname");
+	public static void validateCommonPageAccess(HttpServletRequest request) throws FoodException {
+		if (!isLoggedIn(request, Role.ADMIN) && !isLoggedIn(request, Role.CUSTOMER)) {
+			throw new FoodException(ResponseCode.SESSION_EXPIRED);
+		}
 	}
 
-	public static String getCurrentUserId(HttpServletRequest req) {
-		return (String) req.getSession().getAttribute("userid");
+	public static String getCurrentUserName(HttpServletRequest request) {
+		return (String) request.getSession().getAttribute("uname");
 	}
 
-	public static User getCurrentCustomer(HttpServletRequest req) {
-		return (User) req.getSession().getAttribute(Role.CUSTOMER.toString());
+	public static String getCurrentUserId(HttpServletRequest request) {
+		return (String) request.getSession().getAttribute("userid");
+	}
+
+	public static User getCurrentCustomer(HttpServletRequest request) {
+		return (User) request.getSession().getAttribute(Role.CUSTOMER.toString());
+	}
+
+	public static User getCurrentAdmin(HttpServletRequest request) {
+		return (User) request.getSession().getAttribute(Role.ADMIN.toString());
 	}
 }

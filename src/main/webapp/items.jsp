@@ -9,6 +9,14 @@
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
 <body>
+	<!--  Set the current page name and validate the user role-->
+	<%
+	String uri = request.getRequestURI();
+	String pagename = uri.substring(uri.lastIndexOf("/") + 1);
+	session.setAttribute("currentpage", pagename);
+	FoodUtil.validateUserPageAccess(request, Role.CUSTOMER);
+	%>
+
 	<%@ include file="header.jsp"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 

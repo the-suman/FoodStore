@@ -1,10 +1,8 @@
 package com.foodstore.exception;
 
-import java.io.IOException;
-
 import com.foodstore.enums.ResponseCode;
 
-public class FoodException extends IOException {
+public class FoodException extends RuntimeException {
 
 	/**
 	 * 
