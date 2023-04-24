@@ -33,6 +33,7 @@ public class StoreServiceImpl implements StoreService {
 				store.setAdminId(rs.getString("adminId"));
 				store.setName(rs.getString("name"));
 				store.setDescription(rs.getString("description"));
+				store.setImage(rs.getAsciiStream("image"));
 			}
 			ps.close();
 		} catch (SQLException | FoodException e) {
@@ -58,6 +59,7 @@ public class StoreServiceImpl implements StoreService {
 				store.setAdminId(rs.getString("adminId"));
 				store.setName(rs.getString("name"));
 				store.setDescription(rs.getString("description"));
+				store.setImage(rs.getAsciiStream("image"));
 				stores.add(store);
 			}
 
@@ -82,6 +84,7 @@ public class StoreServiceImpl implements StoreService {
 			ps.setString(3, store.getAdminId());
 			ps.setString(4, store.getName());
 			ps.setString(5, store.getDescription());
+			ps.setBlob(6, store.getImage());
 		} catch (SQLException e) {
 			responseCode += " : " + e.getMessage();
 		}
@@ -100,6 +103,7 @@ public class StoreServiceImpl implements StoreService {
 			ps.setString(3, store.getName());
 			ps.setString(4, store.getDescription());
 			ps.setString(5, store.getStoreId());
+			// ps.setBlob(6, store.getImage());
 			int response = ps.executeUpdate();
 			if (response > 0) {
 				responseCode = ResponseCode.SUCCESS.toString();

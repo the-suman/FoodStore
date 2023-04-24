@@ -36,6 +36,7 @@ public class ItemServiceImpl implements ItemService {
 				item.setDescription(rs.getString("description"));
 				item.setPrice(rs.getDouble("price"));
 				item.setQty(rs.getInt("qty"));
+				item.setImage(rs.getAsciiStream("image"));
 				items.add(item);
 			}
 			ps.close();
@@ -65,6 +66,7 @@ public class ItemServiceImpl implements ItemService {
 				item.setDescription(rs.getString("description"));
 				item.setPrice(rs.getDouble("price"));
 				item.setQty(rs.getInt("qty"));
+				item.setImage(rs.getAsciiStream("image"));
 			}
 			ps.close();
 		} catch (SQLException | FoodException e) {
@@ -77,7 +79,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public String addItem(Item item) throws FoodException {
 		String responseCode = ResponseCode.FAILURE.toString();
-		String query = "INSERT INTO ITEM VALUES (?,?,?,?,?,?,?)";
+		String query = "INSERT INTO ITEM VALUES (?,?,?,?,?,?,?,?)";
 
 		try {
 			Connection connection = DBUtil.getConnection();
@@ -89,6 +91,7 @@ public class ItemServiceImpl implements ItemService {
 			ps.setString(5, item.getDescription());
 			ps.setDouble(6, item.getPrice());
 			ps.setInt(7, item.getQty());
+			ps.setBlob(8, item.getImage());
 
 		} catch (SQLException e) {
 			responseCode += " : " + e.getMessage();
@@ -131,7 +134,7 @@ public class ItemServiceImpl implements ItemService {
 			ps.setDouble(5, item.getPrice());
 			ps.setInt(6, item.getQty());
 			ps.setString(7, item.getItemId());
-
+			// ps.setBlob(7, item.getImage());
 			int response = ps.executeUpdate();
 			if (response > 0) {
 				responseCode = ResponseCode.SUCCESS.toString();

@@ -1,5 +1,6 @@
 package com.foodstore.model;
 
+import java.io.InputStream;
 import java.io.Serializable;
 
 public class Store implements Serializable {
@@ -14,6 +15,7 @@ public class Store implements Serializable {
 	private String adminId;
 	private String name;
 	private String description;
+	private InputStream image;
 
 	public String getStoreId() {
 		return storeId;
@@ -53,6 +55,14 @@ public class Store implements Serializable {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public InputStream getImage() {
+		return image;
+	}
+
+	public void setImage(InputStream image) {
+		this.image = image;
 	}
 
 }

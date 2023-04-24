@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
 			ps.setLong(5, user.getMob());
 			ps.setString(6, user.getEmail());
 			ps.setString(7, user.getPassword());
+			ps.setBlob(8, user.getImage());
 
 			// Execute the query or update the query
 
@@ -94,7 +95,7 @@ public class UserServiceImpl implements UserService {
 				user.setPassword(rs.getString("password"));
 				user.setMob(rs.getLong("mob"));
 				user.setUserId(rs.getString("userId"));
-
+				user.setImage(rs.getAsciiStream("image"));
 			} else {
 				throw new FoodException(ResponseCode.UNAUTHORIZED);
 			}
@@ -125,6 +126,7 @@ public class UserServiceImpl implements UserService {
 				user.setPassword(rs.getString("password"));
 				user.setMob(rs.getLong("mob"));
 				user.setUserId(rs.getString("userId"));
+				user.setImage(rs.getAsciiStream("image"));
 			} else {
 				throw new FoodException(ResponseCode.UNAUTHORIZED);
 			}
