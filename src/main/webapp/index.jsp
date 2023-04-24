@@ -5,23 +5,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Home Page</title>
+<title>FoodKart</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 
 <style>
-body {
+/* body {
 	background-image: url('img/cake.jpg');
 	background-size: cover;
-}
+} */
 </style>
 </head>
 
 <body>
 
 	<jsp:include page="header.jsp" flush="true" />
-
-	<label style="min-height: 800px;">User Home</label>
+	<jsp:include page="slideshow.jsp">
+		<jsp:param name="height" value="500px" />
+		<jsp:param name="class" value="container pt-2" />
+	</jsp:include>
 
 	<%@ include file="footer.jsp"%>
 	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>

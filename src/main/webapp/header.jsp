@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Header Menu</title>
+<title>FoodKart</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 </head>
@@ -24,8 +24,9 @@
 		<c:when test="${isLoggedInAsCustomer}">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 				<div class="container-fluid">
-					<a class="navbar-brand " href="index.jsp"> <img src="img/logo.png"
-						class="border-radius: 10px" height="50" width="130" />
+					<a class="navbar-brand " href="index.jsp"> <img
+						src="img/logo.png" class="border-radius: 10px" height="50"
+						width="130" />
 					</a>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -41,10 +42,9 @@
 									type="button">Restaurant</button></li>
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
 									type="button">About Us</button></li>
-							<li class="nav-item"><button class="btn btn-dark fw-bold" onclick="location.href='cart.jsp'"
-									type="button">
-									<i class="fa fa-shopping-cart"
-										style="font-size: 21px;"></i> <span
+							<li class="nav-item"><button class="btn btn-dark fw-bold"
+									onclick="location.href='cart.jsp'" type="button">
+									<i class="fa fa-shopping-cart" style="font-size: 21px;"></i> <span
 										class='badge badge-warning'
 										style='font-size: 12px; background: #ff0000; color: #fff; padding: 0 5px; vertical-align: top; margin-left: -11px;'>
 										1 </span>
@@ -70,8 +70,9 @@
 		<c:when test="${isLoggedInAsAdmin}">
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 				<div class="container-fluid">
-					<a class="navbar-brand " href="index.jsp"> <img src="img/logo.png"
-						class="border-radius: 10px" height="50" width="130" />
+					<a class="navbar-brand " href="index.jsp"> <img
+						src="img/logo.png" class="border-radius: 10px" height="50"
+						width="130" />
 					</a>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -108,8 +109,9 @@
 		<c:otherwise>
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 				<div class="container-fluid">
-					<a class="navbar-brand " href="index.jsp"> <img src="img/logo.png"
-						style="border-radius: 10px" height="50" width="130" />
+					<a class="navbar-brand " href="index.jsp"> <img
+						src="img/logo.png" style="border-radius: 10px" height="50"
+						width="130" />
 					</a>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"

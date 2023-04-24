@@ -4,11 +4,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>FoodKart</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-	
+
 	<h3>Hello, Welcome to my Foodkart!!</h3>
 	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
