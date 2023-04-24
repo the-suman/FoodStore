@@ -108,7 +108,11 @@ public class FoodUtil {
 	}
 
 	public static Role getCurrentUserRole(HttpServletRequest request) {
-		return Role.valueOf((String) request.getSession().getAttribute("ROLE"));
+		String role = (String) request.getSession().getAttribute("ROLE");
+		if (role == null || role.isBlank()) {
+			role = Role.CUSTOMER.toString();
+		}
+		return Role.valueOf(role);
 	}
 
 	public static User getCurrentUser(HttpServletRequest request) {

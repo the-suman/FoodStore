@@ -6,10 +6,11 @@
 <meta charset="UTF-8">
 <title>FoodKart</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
 
 	<h3>Hello, Welcome to my Foodkart!!</h3>
-	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

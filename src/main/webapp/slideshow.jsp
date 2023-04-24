@@ -6,11 +6,8 @@
 <meta charset="UTF-8">
 <title>Login Form</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<script src="bootstrap/js/bootstrap.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <link href="css/styles.css" rel="stylesheet">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
 	<%
@@ -38,7 +35,7 @@
 					data-bs-slide-to="2" aria-label="Slide 3"></button>
 			</div>
 			<div class="carousel-inner">
-				<div class="carousel-item active">
+				<div class="carousel-item active" data-interval="500">
 					<img src="img/biryani.jpg" class="d-block w-100" alt="Food Item"
 						height="<%=height%>">
 					<div class="carousel-caption d-none d-md-block">
@@ -47,7 +44,7 @@
 							our customer.</p>
 					</div>
 				</div>
-				<div class="carousel-item">
+				<div class="carousel-item" data-interval="500">
 					<img src="img/friedChicken.jpg" class="d-block w-100"
 						alt="Food Item" height="<%=height%>">
 					<div class="carousel-caption d-none d-md-block">
@@ -55,7 +52,7 @@
 						<p>Take it once and you will thank us later.</p>
 					</div>
 				</div>
-				<div class="carousel-item">
+				<div class="carousel-item" data-interval="500">
 					<img src="img/pizza.jpg" class="d-block w-100" alt="Food Item"
 						height="<%=height%>">
 					<div class="carousel-caption d-none d-md-block">
@@ -77,6 +74,5 @@
 		</div>
 
 	</section>
-	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -7,6 +7,7 @@
 <title>Login Form</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<link href="css/styles.css" rel="stylesheet">
 <style>
 body {
 	background-image: url('cake.jpg');
@@ -110,6 +111,6 @@ body {
 		</div>
 	</div>
 	<%@ include file="footer.jsp"%>
-	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

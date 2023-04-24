@@ -6,11 +6,8 @@
 <meta charset="UTF-8">
 <title>Food Items</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<script src="bootstrap/js/bootstrap.min.js"></script>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <link href="css/styles.css" rel="stylesheet">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
 	<!--  Set the current page name and validate the user role-->
@@ -18,7 +15,7 @@
 	String uri = request.getRequestURI();
 	String pagename = uri.substring(uri.lastIndexOf("/") + 1);
 	session.setAttribute("currentpage", pagename);
-	FoodUtil.validateUserPageAccess(request, Role.CUSTOMER);
+	/* FoodUtil.validateUserPageAccess(request, Role.CUSTOMER); */
 	%>
 
 	<%@ include file="header.jsp"%>
@@ -31,10 +28,10 @@
 				<h3>New products</h3>
 			</header>
 			<div class="row">
-				<div class="col-lg-3 col-md-6 col-sm-6 d-flex">
+				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 d-flex">
 					<div class="card w-100 my-2 shadow-2-strong">
 						<img src="img/burger.jpg" class="card-img-top"
-							style="aspect-ratio: 1/1">
+							style="aspect-ratio: 1/1" height="200px" width="180px">
 						<div class="card-body d-flex flex-column">
 							<h5 class="card-title">BURGER</h5>
 							<p class="card-text">Rs.250</p>
@@ -51,7 +48,7 @@
 				<div class="col-lg-3 col-md-6 col-sm-6 d-flex">
 					<div class="card w-100 my-2 shadow-2-strong">
 						<img src="img/pizza.jpg" class="card-img-top"
-							style="aspect-ratio: 1/1">
+							style="aspect-ratio: 1/1" height="200px" width="180px">
 						<div class="card-body d-flex flex-column">
 							<h5 class="card-title">CHEESE PIZZA</h5>
 							<p class="card-text">Rs.300</p>
@@ -68,7 +65,7 @@
 				<div class="col-lg-3 col-md-6 col-sm-6 d-flex">
 					<div class="card w-100 my-2 shadow-2-strong">
 						<img src="img/samosa.jpg" class="card-img-top"
-							style="aspect-ratio: 1/1">
+							style="aspect-ratio: 1/1" height="200px" width="180px">
 						<div class="card-body d-flex flex-column">
 							<h5 class="card-title">INDIAN- SAMOSA</h5>
 							<p class="card-text">Rs.20</p>
@@ -85,7 +82,7 @@
 				<div class="col-lg-3 col-md-6 col-sm-6 d-flex">
 					<div class="card w-100 my-2 shadow-2-strong">
 						<img src="img/dosa2.jpg" class="card-img-top"
-							style="aspect-ratio: 1/1">
+							style="aspect-ratio: 1/1" height="200px" width="180px">
 						<div class="card-body d-flex flex-column">
 							<h5 class="card-title">South Inidan DOSA</h5>
 							<p class="card-text">Rs.90</p>
@@ -103,6 +100,5 @@
 		</div>
 	</section>
 	<%@ include file="footer.jsp"%>
-	<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -7,13 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>My Profile</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<link href="css/styles.css" rel="stylesheet">
 </head>
 <body>
 	<!--  Set the current page name and validate the user role-->
@@ -183,7 +179,5 @@
 
 	<!--  Include the footer to the page-->
 	<%@ include file="footer.jsp"%>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
