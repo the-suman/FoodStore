@@ -26,7 +26,8 @@
 		<jsp:param name="height" value="500px" />
 		<jsp:param name="class" value="container-lg" />
 	</jsp:include>
-
+	<img src="./ShowImage?image="
+		style="width: 150px; height: 150px; border: 2px solid hidden; border-radius: 10px;">
 	<%@ include file="footer.jsp"%>
 </body>
 </html>
