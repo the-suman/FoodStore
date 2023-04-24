@@ -4,6 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>FoodKart</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -11,9 +13,8 @@
 </head>
 <body>
 	<div class="mt-5">
-
 		<footer class="text-center text-lg-start"
-			style="background-color: #db6930;">
+			style="background-color: #db6930; margin-top: 400px;">
 			<div class="container d-flex justify-content-center py-5">
 				<button type="button"
 					class="btn btn-primary btn-lg btn-floating mx-2"

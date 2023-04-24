@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>FoodKart</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -22,7 +24,7 @@
 	<jsp:include page="header.jsp" flush="true" />
 	<jsp:include page="slideshow.jsp">
 		<jsp:param name="height" value="500px" />
-		<jsp:param name="class" value="container pt-2" />
+		<jsp:param name="class" value="container-lg" />
 	</jsp:include>
 
 	<%@ include file="footer.jsp"%>

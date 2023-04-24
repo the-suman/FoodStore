@@ -5,6 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>FoodKart</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
@@ -26,8 +28,8 @@
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 				<div class="container-fluid">
 					<a class="navbar-brand " href="index.jsp"> <img
-						src="img/logo.png" class="border-radius: 10px" height="50"
-						width="130" />
+						src="img/logo.png" style="border-radius: 10px" height="40"
+						width="110" />
 					</a>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -36,7 +38,7 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<ul class="navbar-nav gap-2">
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
 									type="button" onclick="location.href='items.jsp'">Menu</button></li>
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
@@ -51,18 +53,23 @@
 										1 </span>
 								</button></li>
 						</ul>
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="Search" aria-label="Search Items">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
-						&nbsp;
-						<div class="d-grid gap-2 d-md-block">
-							<button class="btn btn-secondary fw-bold" type="button"
-								onclick="location.href='profile.jsp'">Profile</button>
-							<button class="btn btn-secondary fw-bold"
-								onclick="location.href='logout'" type="button">Logout</button>
-						</div>
+						<ul class="navbar-nav gap-2 ms-auto">
+							<li class="nav-item">
+								<form class="navbar-form d-flex mt-2 mt-lg-auto" role="search">
+									<input class="form-control me-2" type="search"
+										placeholder="Search" aria-label="Search Items">
+									<button class="btn btn-outline-success" type="submit">Search</button>
+								</form>
+							</li>
+							<li>
+								<button class="btn btn-secondary fw-bold" type="button"
+									onclick="location.href='profile.jsp'">Profile</button>
+							</li>
+							<li>
+								<button class="btn btn-secondary fw-bold"
+									onclick="location.href='logout'" type="button">Logout</button>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</nav>
@@ -72,8 +79,8 @@
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 				<div class="container-fluid">
 					<a class="navbar-brand " href="index.jsp"> <img
-						src="img/logo.png" class="border-radius: 10px" height="50"
-						width="130" />
+						src="img/logo.png" style="border-radius: 10px" height="40"
+						width="110" />
 					</a>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -82,7 +89,7 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<ul class="navbar-nav gap-2">
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
 									type="button">Menu</button></li>
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
@@ -90,18 +97,23 @@
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
 									type="button">About Us</button></li>
 						</ul>
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="Search" aria-label="Search Items">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
-						&nbsp;
-						<div class="d-grid gap-2 d-md-block">
-							<button class="btn btn-secondary fw-bold" type="button"
-								onclick="location.href='profile.jsp'">Profile</button>
-							<button class="btn btn-secondary fw-bold"
-								onclick="location.href='logout'" type="button">Logout</button>
-						</div>
+						<ul class="navbar-nav gap-2 ms-auto">
+							<li class="nav-item">
+								<form class="navbar-form d-flex mt-2 mt-lg-auto" role="search">
+									<input class="form-control me-2" type="search"
+										placeholder="Search" aria-label="Search Items">
+									<button class="btn btn-outline-success" type="submit">Search</button>
+								</form>
+							</li>
+							<li>
+								<button class="btn btn-secondary fw-bold" type="button"
+									onclick="location.href='profile.jsp'">Profile</button>
+							</li>
+							<li>
+								<button class="btn btn-secondary fw-bold"
+									onclick="location.href='logout'" type="button">Logout</button>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</nav>
@@ -111,8 +123,8 @@
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
 				<div class="container-fluid">
 					<a class="navbar-brand " href="index.jsp"> <img
-						src="img/logo.png" style="border-radius: 10px" height="50"
-						width="130" />
+						src="img/logo.png" style="border-radius: 10px" height="40"
+						width="110" />
 					</a>
 					<button class="navbar-toggler" type="button"
 						data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -121,23 +133,32 @@
 						<span class="navbar-toggler-icon"></span>
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
-						<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-							<li class="nav-item"><button class="btn btn-dark fw-bold"
-									type="button">About Us</button></li>
+						<ul class="navbar-nav gap-2">
+							<li class="nav-item">
+								<button class="btn btn-secondary fw-bold" type="button">About
+									Us</button>
+							</li>
+							<li><button class="btn btn-secondary fw-bold" type="button">Food
+									Items</button></li>
 						</ul>
-						<form class="d-flex">
-							<input class="form-control me-2" type="search"
-								placeholder="Search" aria-label="Search Items">
-							<button class="btn btn-outline-success" type="submit">Search</button>
-						</form>
-						&nbsp;
-						<div class="d-grid gap-2 d-md-block">
-							<button class="btn btn-secondary fw-bold"
-								onclick="location.href='login.jsp'" type="button">Login</button>
-							<button class="btn btn-secondary fw-bold"
-								onclick="location.href='register.jsp'" type="button">Sign
-								Up</button>
-						</div>
+						<ul class="navbar-nav gap-2 ms-auto">
+							<li class="nav-item">
+								<form class="navbar-form d-flex mt-2 mt-lg-auto" role="search">
+									<input class="form-control me-2" type="search"
+										placeholder="Search" aria-label="Search Items">
+									<button class="btn btn-outline-success" type="submit">Search</button>
+								</form>
+							</li>
+							<li>
+								<button class="btn btn-secondary fw-bold"
+									onclick="location.href='login.jsp'" type="button">Login</button>
+							</li>
+							<li>
+								<button class="btn btn-secondary fw-bold"
+									onclick="location.href='register.jsp'" type="button">Sign
+									Up</button>
+							</li>
+						</ul>
 					</div>
 				</div>
 			</nav>
