@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -21,14 +20,7 @@ public class ShowImage extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		byte[] image = null;
-
-		InputStream stream = (InputStream) request.getAttribute("image");
-
-		if (stream != null) {
-			image = stream.readAllBytes();
-		}
-
+		byte[] image = (byte[]) request.getSession().getAttribute("image");
 		if (image == null) {
 			File fnew = new File(getServletContext().getRealPath("img/noimage.jpg"));
 			BufferedImage originalImage = ImageIO.read(fnew);

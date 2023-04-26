@@ -1,6 +1,5 @@
 package com.foodstore.model;
 
-import java.io.InputStream;
 import java.io.Serializable;
 
 public class User implements Serializable {
@@ -17,7 +16,7 @@ public class User implements Serializable {
 	private Long mob;
 	private String email;
 	private String password;
-	private InputStream image;
+	private byte[] image;
 
 	public String getUserId() {
 		return userId;
@@ -75,11 +74,11 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public InputStream getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(InputStream image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 

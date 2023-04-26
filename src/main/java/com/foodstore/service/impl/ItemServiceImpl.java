@@ -36,6 +36,7 @@ public class ItemServiceImpl implements ItemService {
 				item.setDescription(rs.getString("description"));
 				item.setPrice(rs.getDouble("price"));
 				item.setQty(rs.getInt("qty"));
+				item.setVegeterian(rs.getInt("vegeterian"));
 				item.setImage(rs.getAsciiStream("image"));
 				items.add(item);
 			}
@@ -66,6 +67,7 @@ public class ItemServiceImpl implements ItemService {
 				item.setDescription(rs.getString("description"));
 				item.setPrice(rs.getDouble("price"));
 				item.setQty(rs.getInt("qty"));
+				item.setVegeterian(rs.getInt("vegeterian"));
 				item.setImage(rs.getAsciiStream("image"));
 			}
 			ps.close();
@@ -79,7 +81,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public String addItem(Item item) throws FoodException {
 		String responseCode = ResponseCode.FAILURE.toString();
-		String query = "INSERT INTO ITEM VALUES (?,?,?,?,?,?,?,?)";
+		String query = "INSERT INTO ITEM VALUES (?,?,?,?,?,?,?,?,?)";
 
 		try {
 			Connection connection = DBUtil.getConnection();
@@ -91,7 +93,8 @@ public class ItemServiceImpl implements ItemService {
 			ps.setString(5, item.getDescription());
 			ps.setDouble(6, item.getPrice());
 			ps.setInt(7, item.getQty());
-			ps.setBlob(8, item.getImage());
+			ps.setInt(8, item.getVegeterian());
+			ps.setBlob(9, item.getImage());
 
 		} catch (SQLException e) {
 			responseCode += " : " + e.getMessage();
@@ -122,7 +125,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public String updateItem(Item item) throws FoodException {
 		String responseCode = ResponseCode.FAILURE.toString();
-		String query = "UPDATE ITEM SET STOREID=?, NAME=?, TYPE=?, DESCRIPTION=?, PRICE=?, QTY=? WHERE ITEMID=?";
+		String query = "UPDATE ITEM SET STOREID=?, NAME=?, TYPE=?, DESCRIPTION=?, PRICE=?, QTY=?, VEGETERIAN=? WHERE ITEMID=?";
 		try {
 			Connection connection = DBUtil.getConnection();
 			PreparedStatement ps = connection.prepareStatement(query);
@@ -133,8 +136,10 @@ public class ItemServiceImpl implements ItemService {
 			ps.setString(4, item.getDescription());
 			ps.setDouble(5, item.getPrice());
 			ps.setInt(6, item.getQty());
-			ps.setString(7, item.getItemId());
-			// ps.setBlob(7, item.getImage());
+			ps.setInt(7, item.getVegeterian());
+			// ps.setBlob(9, item.getImage());
+			ps.setString(8, item.getItemId());
+
 			int response = ps.executeUpdate();
 			if (response > 0) {
 				responseCode = ResponseCode.SUCCESS.toString();

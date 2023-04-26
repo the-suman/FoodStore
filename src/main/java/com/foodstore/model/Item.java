@@ -18,6 +18,7 @@ public class Item implements Serializable {
 	private String description;
 	private Double price;
 	private Integer qty;
+	private Integer vegeterian;
 	private InputStream image;
 
 	public String getItemId() {
@@ -82,5 +83,13 @@ public class Item implements Serializable {
 
 	public void setImage(InputStream image) {
 		this.image = image;
+	}
+
+	public Integer getVegeterian() {
+		return vegeterian;
+	}
+
+	public void setVegeterian(Integer vegeterian) {
+		this.vegeterian = vegeterian;
 	}
 }

@@ -11,10 +11,10 @@
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <link href="css/styles.css" rel="stylesheet">
 <style>
-body {
+/* body {
 	background-image: url('cake.jpg');
 	background-size: cover;
-}
+} */
 </style>
 </head>
 <body>

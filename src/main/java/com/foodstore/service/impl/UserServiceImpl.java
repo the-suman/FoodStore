@@ -11,6 +11,7 @@ import com.foodstore.exception.FoodException;
 import com.foodstore.model.User;
 import com.foodstore.service.UserService;
 import com.foodstore.util.DBUtil;
+import com.foodstore.util.FoodUtil;
 
 public class UserServiceImpl implements UserService {
 
@@ -23,7 +24,7 @@ public class UserServiceImpl implements UserService {
 		Connection connection = DBUtil.getConnection();
 
 		// Write the query to insert the user into the user database
-		String query = "INSERT INTO USER VALUES(?,?,?,?,?,?,?)";
+		String query = "INSERT INTO USER VALUES(?,?,?,?,?,?,?,?)";
 
 		// Create the prepared statement object
 		try {
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService {
 			ps.setLong(5, user.getMob());
 			ps.setString(6, user.getEmail());
 			ps.setString(7, user.getPassword());
-			ps.setBlob(8, user.getImage());
+			ps.setBlob(8, FoodUtil.convertToBlob(user.getImage()));
 
 			// Execute the query or update the query
 
@@ -95,7 +96,7 @@ public class UserServiceImpl implements UserService {
 				user.setPassword(rs.getString("password"));
 				user.setMob(rs.getLong("mob"));
 				user.setUserId(rs.getString("userId"));
-				user.setImage(rs.getAsciiStream("image"));
+				user.setImage(rs.getBytes("image"));
 			} else {
 				throw new FoodException(ResponseCode.UNAUTHORIZED);
 			}
@@ -126,7 +127,7 @@ public class UserServiceImpl implements UserService {
 				user.setPassword(rs.getString("password"));
 				user.setMob(rs.getLong("mob"));
 				user.setUserId(rs.getString("userId"));
-				user.setImage(rs.getAsciiStream("image"));
+				user.setImage(rs.getBytes("image"));
 			} else {
 				throw new FoodException(ResponseCode.UNAUTHORIZED);
 			}
@@ -137,5 +138,26 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 
+	}
+
+	@Override
+	public String updateProfilePhoto(String userId, byte[] image) throws FoodException {
+		String responseCode = ResponseCode.FAILURE.toString();
+		String query = "UPDATE USER SET IMAGE=? WHERE USERID=?";
+		try {
+			Connection connection = DBUtil.getConnection();
+			PreparedStatement ps = connection.prepareStatement(query);
+
+			ps.setBlob(1, FoodUtil.convertToBlob(image));
+			ps.setString(2, userId);
+			int response = ps.executeUpdate();
+			if (response > 0) {
+				responseCode = ResponseCode.SUCCESS.toString();
+			}
+			ps.close();
+		} catch (SQLException | FoodException e) {
+			responseCode += " : " + e.getMessage();
+		}
+		return responseCode;
 	}
 }

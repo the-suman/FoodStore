@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"
+	pageEncoding="UTF-8" import="java.util.*, java.io.*"
 	import="com.foodstore.util.*, com.foodstore.enums.*"
 	import="com.foodstore.model.*"%>
 <!DOCTYPE html>
@@ -46,12 +46,46 @@
 			<div class="col-lg-4">
 				<div class="card mb-4">
 					<div class="card-body text-center">
-						<img src="img/profile.jpg" class="rounded-circle img-fluid"
-							style="width: 150px;">
+
+						<%-- <img src="ShowImage"
+							class="rounded-circle img-fluid"
+							<%session.setAttribute("image", user.getImage());%> 
+							style="width: 150px;"> --%>
+						<%-- <img src="<%=FoodUtil.showImage(user.getImage())%>"
+							class="rounded-circle img-fluid"
+							style="width: 150px; height: 160px;"> --%>
+
+						<div class="d-flex justify-content-center my-1">
+							<div
+								class="container-profilepic card rounded-circle overflow-hidden">
+								<div class="photo-preview card-img w-100 h-100">
+									<img src="<%=FoodUtil.showImage(user.getImage())%>"
+										class="rounded-circle img-fluid"
+										style="width: 150px; height: 160px;">
+								</div>
+								<div
+									class="middle-profilepic text-center card-img-overlay d-none flex-column justify-content-center">
+									<div class="text-profilepic text-success">
+										<label class="form-label m-0 p-0" for="customFile2"> <i
+											class="fas fa-camera fa-2x"></i><br /> <span
+											class="text-profilepic">Change it</span>
+
+										</label>
+										<form action="uploadProfilePhoto" method="post"
+											enctype="multipart/form-data">
+											<input type="hidden" name="userid"
+												value="<%=user.getUserId()%>" /> <input type="file"
+												name="image" class="form-control d-none" id="customFile2"
+												onchange="form.submit()" />
+										</form>
+
+									</div>
+								</div>
+							</div>
+						</div>
 						<h5 class="my-3">
 							Hello
-							<%=user.getfName()%>
-							here!!
+							<%=user.getfName()%>, welcome!!
 						</h5>
 						<!-- <p class="text-muted mb-1">Full Stack Developer</p>
 						<p class="text-muted mb-4">Bay Area, San Francisco, CA</p> -->

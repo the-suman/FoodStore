@@ -5,15 +5,17 @@ import com.foodstore.exception.FoodException;
 import com.foodstore.model.User;
 
 public interface UserService {
- 
-	//Register User
+
+	// Register User
 	public String registerUser(User user, Role role) throws FoodException;
-	
-	//Login User
+
+	// Login User
 	public User loginUser(String userId, String password, Role role) throws FoodException;
-	
-	//Add User
+
+	// Add User
 	public User getUserById(String userId) throws FoodException;
-	
+
+	// update User Photo
+	public String updateProfilePhoto(String userId, byte[] image) throws FoodException;
 
 }

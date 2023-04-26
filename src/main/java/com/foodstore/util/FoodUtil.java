@@ -1,12 +1,16 @@
 package com.foodstore.util;
 
+import java.sql.SQLException;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Optional;
 import java.util.UUID;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
 
 import com.foodstore.enums.ResponseCode;
 import com.foodstore.enums.Role;
@@ -117,5 +121,23 @@ public class FoodUtil {
 
 	public static User getCurrentUser(HttpServletRequest request) {
 		return (User) request.getSession().getAttribute("USER");
+	}
+
+	public static String showImage(byte[] image) {
+		String base64Image = "data:image/jpeg;base64,";
+		if (image != null && image.length > 0) {
+			base64Image += Base64.getEncoder().encodeToString(image);
+		} else {
+			base64Image = "img/noimage.jpg";
+		}
+		return base64Image;
+	}
+
+	public static SerialBlob convertToBlob(byte[] image) throws SerialException, SQLException {
+		SerialBlob blob = null;
+		if (image != null) {
+			blob = new SerialBlob(image);
+		}
+		return blob;
 	}
 }
