@@ -1,6 +1,5 @@
 package com.foodstore.model;
 
-import java.io.InputStream;
 import java.io.Serializable;
 
 import com.foodstore.enums.FoodType;
@@ -19,7 +18,7 @@ public class Item implements Serializable {
 	private Double price;
 	private Integer qty;
 	private Integer vegeterian;
-	private InputStream image;
+	private byte[] image;
 
 	public String getItemId() {
 		return itemId;
@@ -77,11 +76,11 @@ public class Item implements Serializable {
 		this.qty = qty;
 	}
 
-	public InputStream getImage() {
+	public byte[] getImage() {
 		return image;
 	}
 
-	public void setImage(InputStream image) {
+	public void setImage(byte[] image) {
 		this.image = image;
 	}
 

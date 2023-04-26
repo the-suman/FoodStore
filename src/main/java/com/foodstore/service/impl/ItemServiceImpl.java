@@ -37,7 +37,7 @@ public class ItemServiceImpl implements ItemService {
 				item.setPrice(rs.getDouble("price"));
 				item.setQty(rs.getInt("qty"));
 				item.setVegeterian(rs.getInt("vegeterian"));
-				item.setImage(rs.getAsciiStream("image"));
+				item.setImage(rs.getBytes("image"));
 				items.add(item);
 			}
 			ps.close();
@@ -68,7 +68,7 @@ public class ItemServiceImpl implements ItemService {
 				item.setPrice(rs.getDouble("price"));
 				item.setQty(rs.getInt("qty"));
 				item.setVegeterian(rs.getInt("vegeterian"));
-				item.setImage(rs.getAsciiStream("image"));
+				item.setImage(rs.getBytes("image"));
 			}
 			ps.close();
 		} catch (SQLException | FoodException e) {
@@ -94,7 +94,7 @@ public class ItemServiceImpl implements ItemService {
 			ps.setDouble(6, item.getPrice());
 			ps.setInt(7, item.getQty());
 			ps.setInt(8, item.getVegeterian());
-			ps.setBlob(9, item.getImage());
+			ps.setBlob(9, FoodUtil.convertToBlob(item.getImage()));
 
 		} catch (SQLException e) {
 			responseCode += " : " + e.getMessage();
@@ -125,7 +125,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public String updateItem(Item item) throws FoodException {
 		String responseCode = ResponseCode.FAILURE.toString();
-		String query = "UPDATE ITEM SET STOREID=?, NAME=?, TYPE=?, DESCRIPTION=?, PRICE=?, QTY=?, VEGETERIAN=? WHERE ITEMID=?";
+		String query = "UPDATE ITEM SET STOREID=?, NAME=?, TYPE=?, DESCRIPTION=?, PRICE=?, QTY=?, VEGETERIAN=?, IMAGE=? WHERE ITEMID=?";
 		try {
 			Connection connection = DBUtil.getConnection();
 			PreparedStatement ps = connection.prepareStatement(query);
@@ -137,8 +137,8 @@ public class ItemServiceImpl implements ItemService {
 			ps.setDouble(5, item.getPrice());
 			ps.setInt(6, item.getQty());
 			ps.setInt(7, item.getVegeterian());
-			// ps.setBlob(9, item.getImage());
-			ps.setString(8, item.getItemId());
+			ps.setBlob(8, FoodUtil.convertToBlob(item.getImage()));
+			ps.setString(9, item.getItemId());
 
 			int response = ps.executeUpdate();
 			if (response > 0) {
