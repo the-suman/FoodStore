@@ -23,9 +23,10 @@
 
 	<jsp:include page="header.jsp" flush="true" />
 	<jsp:include page="slideshow.jsp">
-		<jsp:param name="height" value="500px" />
-		<jsp:param name="class" value="container-lg" />
+		<jsp:param name="height" value="510px" />
+		
 	</jsp:include>
+	<%-- <jsp:param name="class" value="container-lg" /> --%>
 	
 	<%@ include file="footer.jsp"%>
 </body>
