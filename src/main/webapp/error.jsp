@@ -8,7 +8,7 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>Error Page</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src="https://kit.fontawesome.com/133ab84eeb.js"></script>
 <link href="css/styles.css" rel="stylesheet">
 </head>
 <body>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
-	import="com.foodstore.util.FoodUtil, com.foodstore.enums.Role"%>
+	import="com.foodstore.util.*, com.foodstore.enums.*, 
+	com.foodstore.model.*, com.foodstore.service.impl.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +10,11 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 <title>FoodKart</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-<script src='https://kit.fontawesome.com/a076d05399.js'></script>
+<script src="https://kit.fontawesome.com/133ab84eeb.js"></script>
 <link href="css/styles.css" rel="stylesheet">
+<link
+	href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+	rel="stylesheet" type='text/css'>
 </head>
 <body>
 	<%
@@ -18,7 +22,12 @@
 	boolean isLoggedInAsAdmin = FoodUtil.isLoggedIn(request, Role.ADMIN);
 	request.setAttribute("isLoggedInAsCustomer", isLoggedInAsCustomer);
 	request.setAttribute("isLoggedInAsAdmin", isLoggedInAsAdmin);
-	System.out.println(isLoggedInAsCustomer);
+	User user = FoodUtil.getCurrentUser(request);
+	int cartQty = 0;
+	if (user != null) {
+		cartQty = new CartServiceImpl().getCartItemsByUserId(user.getUserId()).size();
+	}
+	request.setAttribute("cartQty", cartQty);
 	%>
 
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
@@ -67,23 +76,32 @@
 						<ul class="navbar-nav gap-2 ms-auto">
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
 									onclick="location.href='cart.jsp'" type="button">
-									<i class="fa fa-shopping-cart" style="font-size: 21px;"></i> <span
-										class='badge badge-warning'
-										style='font-size: 12px; background: #ff0000; color: #fff; padding: 0 5px; vertical-align: top; margin-left: -11px;'>
-										1 </span>
+									<i class="fa fa-shopping-cart" style="font-size: 21px;"></i>
+									<c:if test="${cartQty > 0 }">
+										<span class='badge badge-warning'
+											style='font-size: 12px; background: #ff0000; color: #fff; padding: 0 5px; vertical-align: top; margin-left: -11px;'>
+											<%=cartQty%>
+										</span>
+									</c:if>
 								</button></li>
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
-									type="button" onclick="location.href='orders.jsp'">Orders</button></li>
+									type="button" onclick="location.href='orders.jsp'"><i class="fa fa-shopping-bag fa-fw"></i> Orders</button></li>
 
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
-									type="button" onclick="location.href='about.jsp'">About</button></li>
+									type="button" onclick="location.href='about.jsp'">
+									<i class="fa fa-info-circle fa-fw"></i> About
+								</button></li>
 							<li>
 								<button class="btn btn-dark fw-bold" type="button"
-									onclick="location.href='profile.jsp'">Profile</button>
+									onclick="location.href='profile.jsp'">
+									<i class="fa fa-user fa-fw"></i> Profile
+								</button>
 							</li>
 							<li>
 								<button class="btn btn-dark fw-bold"
-									onclick="location.href='logout'" type="button">Logout</button>
+									onclick="location.href='logout'" type="button">
+									<i class="fa fa-sign-out fa-fw"></i> Logout
+								</button>
 							</li>
 						</ul>
 					</div>
@@ -133,13 +151,15 @@
 						<ul class="navbar-nav gap-2 ms-auto">
 
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
-									type="button" onclick="location.href='vieworders.jsp'">Orders</button></li>
+									type="button" onclick="location.href='vieworders.jsp'">
+									<i class="fa fa-shopping-bag fa-fw"></i> Orders
+								</button></li>
 
 							<li class="nav-item dropdown"><a
 								class="btn btn-dark dropdown-toggle fw-bold" href="items.jsp"
 								id="navbarDarkDropdownAdminMenuLink" role="button"
-								data-bs-toggle="dropdown" aria-expanded="false"> Inventory
-									Actions </a>
+								data-bs-toggle="dropdown" aria-expanded="false"><i
+									class="fa fa-server fa-fw"></i> Inventory Actions </a>
 								<ul class="dropdown-menu dropdown-menu-dark"
 									aria-labelledby="navbarDarkDropdownAdminMenuLink">
 									<li><a class="dropdown-item" href="listitem.jsp">List
@@ -153,11 +173,15 @@
 								</ul></li>
 							<li>
 								<button class="btn btn-dark fw-bold" type="button"
-									onclick="location.href='profile.jsp'">Profile</button>
+									onclick="location.href='profile.jsp'">
+									<i class="fa fa-user fa-fw"></i> Profile
+								</button>
 							</li>
 							<li>
 								<button class="btn btn-dark fw-bold"
-									onclick="location.href='logout'" type="button">Logout</button>
+									onclick="location.href='logout'" type="button">
+									<i class="fa fa-sign-out fa-fw"></i> Logout
+								</button>
 							</li>
 						</ul>
 					</div>
@@ -206,14 +230,20 @@
 						</ul>
 						<ul class="navbar-nav gap-2 ms-auto">
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
-									type="button" onclick="location.href='about.jsp'">About</button></li>
+									type="button" onclick="location.href='about.jsp'">
+									<i class="fa fa-info-circle fa-fw"></i> About
+								</button></li>
 							<li>
 								<button class="btn btn-dark fw-bold"
-									onclick="location.href='login.jsp'" type="button">Login</button>
+									onclick="location.href='login.jsp'" type="button">
+									<i class="fa fa-sign-in fa-fw"></i> Login
+								</button>
 							</li>
 							<li>
 								<button class="btn btn-dark fw-bold"
-									onclick="location.href='register.jsp'" type="button">SignUp</button>
+									onclick="location.href='register.jsp'" type="button">
+									<i class="fa fa-user-plus fa-fw"></i> SignUp
+								</button>
 							</li>
 						</ul>
 					</div>
