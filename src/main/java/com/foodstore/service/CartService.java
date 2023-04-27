@@ -14,4 +14,6 @@ public interface CartService {
 	public String updateCartItemQuantity(CartItem cartItem);
 
 	public List<CartItem> getCartItemsByUserId(String userId) throws FoodException;
+
+	public int getCartItemQuantity(String userId, String itemId);
 }

@@ -1,5 +1,5 @@
 package com.foodstore.enums;
 
 public enum FoodType {
-	DRINK, DESSERT, INDIAN, CHINESE, CONTINENTAL
+	DRINKS, DESSERT, INDIAN, CHINESE, CONTINENTAL
 }

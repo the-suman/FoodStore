@@ -107,4 +107,26 @@ public class CartServiceImpl implements CartService {
 		return cartItems;
 	}
 
+	@Override
+	public int getCartItemQuantity(String userId, String itemId) {
+		int count = 0;
+		String query = "SELECT * FROM CART_ITEMS WHERE USERID=? AND ITEMID=?";
+		try {
+			Connection connection = DBUtil.getConnection();
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, userId);
+			ps.setString(2, itemId);
+			ResultSet rs = ps.executeQuery();
+
+			if (rs.next()) {
+				count = rs.getInt("qty");
+			}
+			ps.close();
+		} catch (SQLException | FoodException e) {
+			System.out.println(e.getMessage());
+			throw new FoodException(e.getMessage());
+		}
+		return count;
+	}
+
 }

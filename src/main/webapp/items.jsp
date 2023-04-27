@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+	import="com.foodstore.model.*, com.foodstore.service.*, 
+	com.foodstore.service.impl.*, com.foodstore.util.*, com.foodstore.enums.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +20,9 @@
 	String pagename = uri.substring(uri.lastIndexOf("/") + 1);
 	session.setAttribute("currentpage", pagename);
 	/* FoodUtil.validateUserPageAccess(request, Role.CUSTOMER); */
+
+	ItemService itemService = new ItemServiceImpl();
+	Item item = itemService.getItemById("ec5007fb-ba15-4f43-add4-76edc7522122");
 	%>
 
 	<%@ include file="header.jsp"%>
@@ -30,6 +35,15 @@
 				<h3>New products</h3>
 			</header>
 			<div class="row">
+
+				<jsp:include page="item.jsp" />
+				
+				<%
+				request.setAttribute("item", item);
+				%>
+				<jsp:include page="item.jsp" />
+
+
 				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 d-flex">
 					<div class="card w-100 my-2 shadow-2-strong">
 						<img src="img/burger.jpg" class="card-img-top"
