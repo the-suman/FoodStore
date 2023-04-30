@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.foodstore.enums.Role;
 import com.foodstore.model.CartItem;
 import com.foodstore.service.CartService;
 import com.foodstore.service.impl.CartServiceImpl;
@@ -24,13 +25,14 @@ public class CartUpdateServlet extends HttpServlet {
 	public CartUpdateServlet() {
 		super();
 	}
-	
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException, ServletException {
+		FoodUtil.validateUserPageAccess(req, Role.CUSTOMER);
 		String action = req.getParameter("action");
 		String id = req.getParameter("id");
 		String cartQty = req.getParameter("cartQty");
-		if(cartQty == null) {
+		if (cartQty == null) {
 			cartQty = "0";
 		}
 		int currentQty = (Integer.parseInt(cartQty));
@@ -41,9 +43,8 @@ public class CartUpdateServlet extends HttpServlet {
 		cartItem.setUserId(FoodUtil.getCurrentUserId(req));
 		String pageName = "items.jsp";
 		if ("add".equalsIgnoreCase(action)) {
-			System.out.println("Not addedd");
+			cartItem.setQty(currentQty + 1);
 			cartService.addItemToCart(cartItem);
-			
 		} else if ("remove".equalsIgnoreCase(action)) {
 			cartService.removeItemFromCart(cartItem);
 		} else if ("minus".equalsIgnoreCase(action)) {
