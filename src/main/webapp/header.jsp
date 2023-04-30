@@ -57,7 +57,7 @@
 								<ul class="dropdown-menu dropdown-menu-dark"
 									aria-labelledby="navbarDarkDropdownMenuLink">
 									<li><a class="dropdown-item" href="items.jsp?type=dessert">Desserts</a></li>
-									<li><a class="dropdown-item" href="items.jsp?type=drink">Drinks</a></li>
+									<li><a class="dropdown-item" href="items.jsp?type=drinks">Drinks</a></li>
 									<li><a class="dropdown-item" href="items.jsp?type=indian">Indian</a></li>
 									<li><a class="dropdown-item" href="items.jsp?type=chinese">Chinese</a></li>
 									<li><a class="dropdown-item"
@@ -133,7 +133,7 @@
 								<ul class="dropdown-menu dropdown-menu-dark"
 									aria-labelledby="navbarDarkDropdownMenuLink">
 									<li><a class="dropdown-item" href="items.jsp?type=dessert">Desserts</a></li>
-									<li><a class="dropdown-item" href="items.jsp?type=drink">Drinks</a></li>
+									<li><a class="dropdown-item" href="items.jsp?type=drinks">Drinks</a></li>
 									<li><a class="dropdown-item" href="items.jsp?type=indian">Indian</a></li>
 									<li><a class="dropdown-item" href="items.jsp?type=chinese">Chinese</a></li>
 									<li><a class="dropdown-item"
@@ -213,7 +213,7 @@
 								<ul class="dropdown-menu dropdown-menu-dark"
 									aria-labelledby="navbarDarkDropdownMenuLink">
 									<li><a class="dropdown-item" href="items.jsp?type=dessert">Desserts</a></li>
-									<li><a class="dropdown-item" href="items.jsp?type=drink">Drinks</a></li>
+									<li><a class="dropdown-item" href="items.jsp?type=drinks">Drinks</a></li>
 									<li><a class="dropdown-item" href="items.jsp?type=indian">Indian</a></li>
 									<li><a class="dropdown-item" href="items.jsp?type=chinese">Chinese</a></li>
 									<li><a class="dropdown-item"

@@ -23,4 +23,8 @@ public interface ItemService {
 	public String updateItem(Item item) throws FoodException;
 	
 	
+	public List<Item> getItemsByType(String type) throws FoodException;
+	
+	
+	public List<Item> searchItems(String text) throws FoodException;
 }

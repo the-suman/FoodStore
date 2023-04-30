@@ -26,7 +26,11 @@ public class CartServiceImpl implements CartService {
 			ps.setString(1, cartItem.getUserId());
 			ps.setString(2, cartItem.getItemId());
 			ps.setInt(3, cartItem.getQty());
-
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				responseCode = ResponseCode.SUCCESS.toString();
+			}
+			ps.close();
 		} catch (SQLException e) {
 			responseCode += " : " + e.getMessage();
 		}

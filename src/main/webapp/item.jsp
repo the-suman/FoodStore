@@ -56,12 +56,12 @@
 						<%=item.getPrice()%></p>
 					<div class="flex-row">
 						<c:if test="${cartQty > 0 }">
-							<a href="cartupdate?action=minus&id=<%=item.getItemId()%>"
+							<a href="cartupdate?action=minus&id=<%=item.getItemId()%>&cartQty=<%=cartQty%>"
 								type="button" class="btn btn-danger py-0 px-1"> <span
 								class="fa fa-minus"></span>
 							</a>
 							<span class="fw-bold">${cartQty}</span>
-							<a href="cartupdate?action=plus&id=<%=item.getItemId()%>"
+							<a href="cartupdate?action=plus&id=<%=item.getItemId()%>&cartQty=<%=cartQty%>"
 								type="button" class="btn btn-info px-1 py-0"> <span
 								class="fa fa-plus"></span>
 							</a>

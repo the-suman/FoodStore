@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"
 	import="com.foodstore.model.*, com.foodstore.service.*, 
-	com.foodstore.service.impl.*, com.foodstore.util.*, com.foodstore.enums.*"%>
+	com.foodstore.service.impl.*, com.foodstore.util.*, com.foodstore.enums.*, java.util.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +15,7 @@
 </head>
 <body>
 	<!--  Set the current page name and validate the user role-->
+
 	<%
 	String uri = request.getRequestURI();
 	String pagename = uri.substring(uri.lastIndexOf("/") + 1);
@@ -22,98 +23,165 @@
 	/* FoodUtil.validateUserPageAccess(request, Role.CUSTOMER); */
 
 	ItemService itemService = new ItemServiceImpl();
-	Item item = itemService.getItemById("ec5007fb-ba15-4f43-add4-76edc7522122");
+	/* Item item = itemService.getItemById("ec5007fb-ba15-4f43-add4-76edc7522122"); */
+	//List<Item> items = itemService.getAllItems();
+	/* String type = request.getParameter("type"); */
+	List<Item> itemsOfDrinks = itemService.getItemsByType(FoodType.DRINKS.toString());
+	List<Item> itemsOfDessert = itemService.getItemsByType(FoodType.DESSERT.toString());
+	List<Item> itemsOfIndian = itemService.getItemsByType(FoodType.INDIAN.toString());
+	List<Item> itemsOfChinese = itemService.getItemsByType(FoodType.CHINESE.toString());
+	List<Item> itemsOfContinental = itemService.getItemsByType(FoodType.CONTINENTAL.toString());
+
+	List<Item> searchItems = new ArrayList<Item>();
+
+	String search = request.getParameter("search");
+	String type = request.getParameter("type");
+	String message = "All Products";
+	if (search != null) {
+		searchItems = itemService.searchItems(search);
+		message = "Showing Results for '" + search + "'";
+
+	} else if (type != null) {
+		searchItems = itemService.getItemsByType(type);
+		message = "Showing Results for '" + type + "'";
+	}
+	boolean check = search != null || type != null;
+	request.setAttribute("check", check);
+	if (searchItems.isEmpty()) {
+		message = "No items found for the search '" + (search != null ? search : type) + "'";
+	}
 	%>
 
 	<%@ include file="header.jsp"%>
 	<%@ include file="slideshow.jsp"%>
-
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
+	<c:if test="${check}">
+		<section>
+			<div class="container my-2 ">
+				<header class="mb-2 text-center fw-bold">
+					<p><%=message%></p>
+				</header>
+				<div class="row">
+					<%
+					for (Item item : searchItems) {
+					%>
+					<%
+					request.setAttribute("item", item);
+					%>
+					<jsp:include page="item.jsp" />
+					<%
+					}
+					%>
+				</div>
+				<hr />
+				<p class="text-center text-secondary fw-bold">Explore more items
+					below</p>
+				<hr />
+			</div>
+		</section>
+	</c:if>
+
 	<section>
 		<div class="container my-5">
 			<header class="mb-4">
-				<h3>New products</h3>
+				<h2>Chinese</h2>
 			</header>
 			<div class="row">
-
 				<jsp:include page="item.jsp" />
-				
+				<%
+				for (Item item : itemsOfChinese) {
+				%>
 				<%
 				request.setAttribute("item", item);
 				%>
 				<jsp:include page="item.jsp" />
-
-
-				<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 d-flex">
-					<div class="card w-100 my-2 shadow-2-strong">
-						<img src="img/burger.jpg" class="card-img-top"
-							style="aspect-ratio: 1/1" height="200px" width="180px">
-						<div class="card-body d-flex flex-column">
-							<h5 class="card-title">BURGER</h5>
-							<p class="card-text">Rs.250</p>
-							<div
-								class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-								<a href="#!" class="btn btn-primary shadow-0 me-1" style="">Add
-									to cart</a> <a href="#!"
-									class="btn btn-light border px-2 pt-2 icon-hover"><i
-									class="fas fa-heart fa-lg text-secondary px-1"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-6 d-flex">
-					<div class="card w-100 my-2 shadow-2-strong">
-						<img src="img/pizza.jpg" class="card-img-top"
-							style="aspect-ratio: 1/1" height="200px" width="180px">
-						<div class="card-body d-flex flex-column">
-							<h5 class="card-title">CHEESE PIZZA</h5>
-							<p class="card-text">Rs.300</p>
-							<div
-								class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-								<a href="#!" class="btn btn-primary shadow-0 me-1" style="">Add
-									to cart</a> <a href="#!"
-									class="btn btn-light border px-2 pt-2 icon-hover"><i
-									class="fas fa-heart fa-lg text-secondary px-1"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-6 d-flex">
-					<div class="card w-100 my-2 shadow-2-strong">
-						<img src="img/samosa.jpg" class="card-img-top"
-							style="aspect-ratio: 1/1" height="200px" width="180px">
-						<div class="card-body d-flex flex-column">
-							<h5 class="card-title">INDIAN- SAMOSA</h5>
-							<p class="card-text">Rs.20</p>
-							<div
-								class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-								<a href="#!" class="btn btn-primary shadow-0 me-1" style="">Add
-									to cart</a> <a href="#!"
-									class="btn btn-light border px-2 pt-2 icon-hover"><i
-									class="fas fa-heart fa-lg text-secondary px-1"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-6 col-sm-6 d-flex">
-					<div class="card w-100 my-2 shadow-2-strong">
-						<img src="img/dosa2.jpg" class="card-img-top"
-							style="aspect-ratio: 1/1" height="200px" width="180px">
-						<div class="card-body d-flex flex-column">
-							<h5 class="card-title">South Inidan DOSA</h5>
-							<p class="card-text">Rs.90</p>
-							<div
-								class="card-footer d-flex align-items-end pt-3 px-0 pb-0 mt-auto">
-								<a href="#!" class="btn btn-primary shadow-0 me-1" style="">Add
-									to cart</a> <a href="#!"
-									class="btn btn-light border px-2 pt-2 icon-hover"><i
-									class="fas fa-heart fa-lg text-secondary px-1"></i></a>
-							</div>
-						</div>
-					</div>
-				</div>
+				<%
+				}
+				%>
 			</div>
 		</div>
+
+		<div class="container my-5">
+			<header class="mb-4">
+				<h2>Continental</h2>
+			</header>
+			<div class="row">
+
+				<%-- <jsp:include page="item.jsp" /> --%>
+				<%
+				for (Item item : itemsOfContinental) {
+				%>
+				<%
+				request.setAttribute("item", item);
+				%>
+				<jsp:include page="item.jsp" />
+				<%
+				}
+				%>
+			</div>
+		</div>
+
+		<div class="container my-5">
+			<header class="mb-4">
+				<h2>Indian</h2>
+			</header>
+			<div class="row">
+
+				<%-- <jsp:include page="item.jsp" /> --%>
+				<%
+				for (Item item : itemsOfIndian) {
+				%>
+				<%
+				request.setAttribute("item", item);
+				%>
+				<jsp:include page="item.jsp" />
+				<%
+				}
+				%>
+			</div>
+		</div>
+
+		<div class="container my-5">
+			<header class="mb-4">
+				<h2>Desserts</h2>
+			</header>
+			<div class="row">
+
+				<%-- <jsp:include page="item.jsp" /> --%>
+				<%
+				for (Item item : itemsOfDessert) {
+				%>
+				<%
+				request.setAttribute("item", item);
+				%>
+				<jsp:include page="item.jsp" />
+				<%
+				}
+				%>
+			</div>
+		</div>
+
+		<div class="container my-5">
+			<header class="mb-4">
+				<h2>Drinks</h2>
+			</header>
+			<div class="row">
+
+				<%-- <jsp:include page="item.jsp" /> --%>
+				<%
+				for (Item item : itemsOfDrinks) {
+				%>
+				<%
+				request.setAttribute("item", item);
+				%>
+				<jsp:include page="item.jsp" />
+				<%
+				}
+				%>
+			</div>
+		</div>
+
 	</section>
 	<%@ include file="footer.jsp"%>
 </body>

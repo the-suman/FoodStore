@@ -151,4 +151,73 @@ public class ItemServiceImpl implements ItemService {
 		return responseCode;
 	}
 
+	@Override
+	public List<Item> getItemsByType(String type) throws FoodException {
+		List<Item> items = null;
+		String query = "SELECT * FROM ITEM WHERE UPPER(TYPE)= UPPER(?)";
+		try {
+			Connection connection = DBUtil.getConnection();
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, type);
+			ResultSet rs = ps.executeQuery();
+			items = new ArrayList<Item>();
+			while(rs.next()) {
+				Item item = new Item();
+				item.setItemId(rs.getString("itemId"));
+				item.setStoreId(rs.getString("storeId"));
+				item.setName(rs.getString("name"));
+				String types = rs.getString("type");
+				item.setType(FoodType.valueOf(types));
+				item.setDescription(rs.getString("description"));
+				item.setPrice(rs.getDouble("price"));
+				item.setQty(rs.getInt("qty"));
+				item.setVegeterian(rs.getInt("vegeterian"));
+				item.setImage(rs.getBytes("image"));
+				items.add(item);
+			}
+			ps.close();
+		}catch(SQLException | FoodException e) {
+			System.out.println(e.getMessage());
+			throw new FoodException(e.getMessage());
+		}
+		return items;
+	}
+
+	@Override
+	public List<Item> searchItems(String text) throws FoodException {
+		List<Item> items = new ArrayList<Item>();
+		String query = "SELECT * from ITEM where lower(type) like lower(?) or lower(name) like lower(?) or lower(description) like lower(?)";
+		try {
+			Connection connection = DBUtil.getConnection();
+			PreparedStatement ps = connection.prepareStatement(query);
+			text = "%" + text+ "%";
+			ps.setString(1, text);
+			ps.setString(2, text);
+			ps.setString(3, text);
+			
+			ResultSet rs = ps.executeQuery();
+
+			while(rs.next()) {
+				Item item = new Item();
+				item.setItemId(rs.getString("itemId"));
+				item.setStoreId(rs.getString("storeId"));
+				item.setName(rs.getString("name"));
+				String types = rs.getString("type");
+				item.setType(FoodType.valueOf(types));
+				item.setDescription(rs.getString("description"));
+				item.setPrice(rs.getDouble("price"));
+				item.setQty(rs.getInt("qty"));
+				item.setVegeterian(rs.getInt("vegeterian"));
+				item.setImage(rs.getBytes("image"));
+				
+				items.add(item);
+			}
+			ps.close();
+		}catch(SQLException | FoodException e) {
+			System.out.println(e.getMessage());
+			throw new FoodException(e.getMessage());
+		}
+		return items;
+	}
+
 }
