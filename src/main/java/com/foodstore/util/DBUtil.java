@@ -16,17 +16,17 @@ public class DBUtil {
 		ResourceBundle rb = ResourceBundle.getBundle("application");
 
 		try {
-			Class.forName(rb.getString("driverName"));
+			Class.forName(rb.getString("db.driverName"));
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
 		try {
-			System.out.println(rb.getString("connectionString"));
-			System.out.println(rb.getString("username"));
-			System.out.println(rb.getString("password"));
-			con = DriverManager.getConnection(rb.getString("connectionString"), rb.getString("username"),
-					rb.getString("password"));
+			System.out.println(rb.getString("db.connectionString"));
+			System.out.println(rb.getString("db.username"));
+			System.out.println(rb.getString("db.password"));
+			con = DriverManager.getConnection(rb.getString("db.connectionString"), rb.getString("db.username"),
+					rb.getString("db.password"));
 			System.out.println("Connection Success!!");
 		} catch (SQLException e) {
 

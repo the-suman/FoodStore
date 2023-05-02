@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Optional;
+import java.util.ResourceBundle;
 import java.util.UUID;
 
 import javax.servlet.http.Cookie;
@@ -38,6 +39,7 @@ public class FoodUtil {
 			String password) {
 		UserService userService = new UserServiceImpl();
 		String responseCode = ResponseCode.UNAUTHORIZED.toString();
+		ResourceBundle rb = ResourceBundle.getBundle("application");
 		try {
 			User user = userService.loginUser(username, password, userRole);
 
@@ -53,7 +55,8 @@ public class FoodUtil {
 			Cookie cookie = new Cookie("sessionIdFor" + userRole.toString(), UUID.randomUUID().toString());
 
 			// set the max age for the cookie
-			cookie.setMaxAge(600); // Expires after 10 MIN
+			
+			cookie.setMaxAge(Integer.parseInt(rb.getString("session.expirationTime"))); // Expires after 10 MIN
 
 			// add the cookie to the response
 			response.addCookie(cookie);

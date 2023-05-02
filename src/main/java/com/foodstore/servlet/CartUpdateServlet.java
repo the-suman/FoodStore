@@ -41,20 +41,26 @@ public class CartUpdateServlet extends HttpServlet {
 		cartItem.setItemId(id);
 		cartItem.setQty(currentQty);
 		cartItem.setUserId(FoodUtil.getCurrentUserId(req));
-		String pageName = "items.jsp";
+		String pageOrigin = req.getParameter("origin");
+		String pageName = (pageOrigin == null)? "items.jsp": pageOrigin;
 		if ("add".equalsIgnoreCase(action)) {
 			cartItem.setQty(currentQty + 1);
 			cartService.addItemToCart(cartItem);
 		} else if ("remove".equalsIgnoreCase(action)) {
 			cartService.removeItemFromCart(cartItem);
 		} else if ("minus".equalsIgnoreCase(action)) {
-			cartItem.setQty(currentQty - 1);
-			cartService.updateCartItemQuantity(cartItem);
+			if(currentQty == 1) {
+				cartService.removeItemFromCart(cartItem);
+			}
+			else {
+				cartItem.setQty(currentQty - 1);
+				cartService.updateCartItemQuantity(cartItem);
+			}
 		} else if ("plus".equalsIgnoreCase(action)) {
 			cartItem.setQty(currentQty + 1);
 			cartService.updateCartItemQuantity(cartItem);
 		}
-
+		
 		res.sendRedirect(pageName);
 	}
 
