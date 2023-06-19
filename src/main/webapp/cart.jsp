@@ -127,8 +127,7 @@
 											<div
 												class="d-flex justify-content-between align-items-center mb-4">
 												<h5 class="mb-0">Card details</h5>
-												<img
-													src="<%=FoodUtil.showImage(user.getImage()) %>"
+												<img src="<%=FoodUtil.showImage(user.getImage())%>"
 													class="img-fluid rounded-3" style="width: 45px;"
 													alt="Avatar">
 											</div>
@@ -187,22 +186,26 @@
 
 											<div class="d-flex justify-content-between">
 												<p class="mb-2">Subtotal</p>
-												<p class="mb-2">$<%=totalPrice %></p>
+												<p class="mb-2">
+													$<%=totalPrice%></p>
 											</div>
 
 											<div class="d-flex justify-content-between">
 												<p class="mb-2">Shipping</p>
-												<p class="mb-2">$<%=0.00%></p>
+												<p class="mb-2">
+													$<%=0.00%></p>
 											</div>
 
 											<div class="d-flex justify-content-between mb-4">
 												<p class="mb-2">Total(Incl. taxes)</p>
-												<p class="mb-2">$<%=totalPrice %></p>
+												<p class="mb-2">
+													$<%=totalPrice%></p>
 											</div>
 
-											<button type="button" class="btn btn-info btn-block btn-lg">
+											<button type="button" class="btn btn-info btn-block btn-lg"
+												onclick="location.href='orders.jsp'">
 												<div class="d-flex justify-content-between">
-													<span>$<%=totalPrice %></span> <span>Checkout <i
+													<span>$<%=totalPrice%></span> <span>Checkout <i
 														class="fas fa-long-arrow-alt-right ms-2"></i></span>
 												</div>
 											</button>

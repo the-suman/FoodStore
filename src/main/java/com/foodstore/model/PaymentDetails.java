@@ -75,5 +75,10 @@ public class PaymentDetails implements Serializable {
 	public void setTime(String time) {
 		this.time = time;
 	}
+	 
+	public PaymentDetails() {
+		super();
+		
+	}
 
 }
