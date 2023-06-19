@@ -17,7 +17,7 @@ import com.foodstore.util.FoodUtil;
 public class OrderServiceImpl implements OrderService {
 
 	@Override
-	public String createOrder(OrderDetails orderDetails) {
+	public String placeOrder(OrderDetails orderDetails) {
 		String responseCode = ResponseCode.FAILURE.toString();
 		Connection conn= DBUtil.getConnection();
 		PreparedStatement ps = null;

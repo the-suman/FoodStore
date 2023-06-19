@@ -7,7 +7,7 @@ import com.foodstore.model.OrderDetails;
 
 public interface OrderService {
 	
-	public String createOrder(OrderDetails orderDetails);
+	public String placeOrder(OrderDetails orderDetails);
 
 	public List<OrderDetails> getOrdersByUserId(String userId);
 

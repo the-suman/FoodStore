@@ -32,6 +32,7 @@
 	String userId = user.getUserId();
 	//String itemId = request.getParameter("itemId");
 	List<CartItem> cartItems = cartService.getCartItemsByUserId(userId);
+	request.setAttribute("cartitems", cartItems);
 	int cartQty = cartItems.size();
 	//cartService.getCartItemQuantity(userId, itemId);
 	%>
@@ -142,7 +143,7 @@
 												type="submit" class="text-white"><i
 												class="fab fa-cc-paypal fa-2x"></i></a>
 
-											<form class="mt-4">
+											<form class="mt-4" method="post" action="placeorder">
 												<div class="form-outline form-white mb-4">
 													<input type="text" id="typeName"
 														class="form-control form-control-lg" size="17"
@@ -180,36 +181,35 @@
 													</div>
 												</div>
 
-											</form>
 
-											<hr class="my-4">
 
-											<div class="d-flex justify-content-between">
-												<p class="mb-2">Subtotal</p>
-												<p class="mb-2">
-													$<%=totalPrice%></p>
-											</div>
+												<hr class="my-4">
 
-											<div class="d-flex justify-content-between">
-												<p class="mb-2">Shipping</p>
-												<p class="mb-2">
-													$<%=0.00%></p>
-											</div>
-
-											<div class="d-flex justify-content-between mb-4">
-												<p class="mb-2">Total(Incl. taxes)</p>
-												<p class="mb-2">
-													$<%=totalPrice%></p>
-											</div>
-
-											<button type="button" class="btn btn-info btn-block btn-lg"
-												onclick="location.href='orders.jsp'">
 												<div class="d-flex justify-content-between">
-													<span>$<%=totalPrice%></span> <span>Checkout <i
-														class="fas fa-long-arrow-alt-right ms-2"></i></span>
+													<p class="mb-2">Subtotal</p>
+													<p class="mb-2">
+														$<%=totalPrice%></p>
 												</div>
-											</button>
 
+												<div class="d-flex justify-content-between">
+													<p class="mb-2">Shipping</p>
+													<p class="mb-2">
+														$<%=0.00%></p>
+												</div>
+
+												<div class="d-flex justify-content-between mb-4">
+													<p class="mb-2">Total(Incl. taxes)</p>
+													<p class="mb-2">
+														$<%=totalPrice%></p>
+												</div>
+												
+												<button type="submit" class="btn btn-info btn-block btn-lg">
+													<div class="d-flex justify-content-between">
+														<span>$<%=totalPrice%></span> <span>Checkout <i
+															class="fas fa-long-arrow-alt-right ms-2"></i></span>
+													</div>
+												</button>
+											</form>
 										</div>
 									</div>
 								</div>

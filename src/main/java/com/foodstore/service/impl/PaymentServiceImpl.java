@@ -6,7 +6,7 @@ import com.foodstore.service.PaymentService;
 public class PaymentServiceImpl implements PaymentService{
 
 	@Override
-	public String addPayment(PaymentDetails paymentDetails) {
+	public String savePaymentDetailsAndGenerateId(PaymentDetails paymentDetails) {
 		// TODO Auto-generated method stub
 		return null;
 	}

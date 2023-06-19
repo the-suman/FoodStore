@@ -4,7 +4,7 @@ import com.foodstore.model.PaymentDetails;
 
 public interface PaymentService {
 
-	public String addPayment(PaymentDetails paymentDetails);
+	public String savePaymentDetailsAndGenerateId(PaymentDetails paymentDetails);
 
 	public PaymentDetails getPaymentByUserId();
 }

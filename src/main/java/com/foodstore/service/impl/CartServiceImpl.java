@@ -133,4 +133,10 @@ public class CartServiceImpl implements CartService {
 		return count;
 	}
 
+	@Override
+	public String removeAlItemFromCart(String userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -10,6 +10,8 @@ public interface CartService {
 	public String addItemToCart(CartItem cartItem) throws FoodException;
 
 	public String removeItemFromCart(CartItem cartItem);
+	
+	public String removeAlItemFromCart(String userId);
 
 	public String updateCartItemQuantity(CartItem cartItem);
 
