@@ -6,6 +6,6 @@ import com.foodstore.model.CartItem;
 
 public interface OrderItemsService {
 	
-	public String createOrder(List<CartItem> cartItems); //returns unique orderId
+	public String createOrder(List<CartItem> cartItems, String orderId); //returns unique orderId
 
 }

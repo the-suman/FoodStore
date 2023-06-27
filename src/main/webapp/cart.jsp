@@ -32,7 +32,7 @@
 	String userId = user.getUserId();
 	//String itemId = request.getParameter("itemId");
 	List<CartItem> cartItems = cartService.getCartItemsByUserId(userId);
-	request.setAttribute("cartitems", cartItems);
+	session.setAttribute("cartitems", cartItems);
 	int cartQty = cartItems.size();
 	//cartService.getCartItemQuantity(userId, itemId);
 	%>
@@ -146,7 +146,7 @@
 											<form class="mt-4" method="post" action="placeorder">
 												<div class="form-outline form-white mb-4">
 													<input type="text" id="typeName"
-														class="form-control form-control-lg" size="17"
+														class="form-control form-control-lg" name="CardHolderName" size="17"
 														placeholder="Cardholder's Name" /> <label
 														class="form-label" for="typeName">Cardholder's
 														Name</label>
@@ -154,7 +154,7 @@
 
 												<div class="form-outline form-white mb-4">
 													<input type="text" id="typeText"
-														class="form-control form-control-lg" size="17"
+														class="form-control form-control-lg" name="CardNumber" size="17"
 														placeholder="1234 5678 9012 3457" minlength="19"
 														maxlength="19" /> <label class="form-label"
 														for="typeText">Card Number</label>
@@ -164,7 +164,7 @@
 													<div class="col-md-6">
 														<div class="form-outline form-white">
 															<input type="text" id="typeExp"
-																class="form-control form-control-lg"
+																class="form-control form-control-lg" name="DateOfExp"
 																placeholder="MM/YYYY" size="7" id="exp" minlength="7"
 																maxlength="7" /> <label class="form-label"
 																for="typeExp">Expiration</label>
@@ -173,7 +173,7 @@
 													<div class="col-md-6">
 														<div class="form-outline form-white">
 															<input type="password" id="typeText"
-																class="form-control form-control-lg"
+																class="form-control form-control-lg" name="cvvNumber"
 																placeholder="&#9679;&#9679;&#9679;" size="1"
 																minlength="3" maxlength="3" /> <label
 																class="form-label" for="typeText">Cvv</label>
@@ -184,7 +184,7 @@
 
 
 												<hr class="my-4">
-
+												<input type="hidden" name="amount" value="<%=totalPrice %>">
 												<div class="d-flex justify-content-between">
 													<p class="mb-2">Subtotal</p>
 													<p class="mb-2">

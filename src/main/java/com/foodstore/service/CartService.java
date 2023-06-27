@@ -18,4 +18,6 @@ public interface CartService {
 	public List<CartItem> getCartItemsByUserId(String userId) throws FoodException;
 
 	public int getCartItemQuantity(String userId, String itemId);
+	
+	
 }

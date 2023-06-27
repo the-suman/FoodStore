@@ -135,8 +135,24 @@ public class CartServiceImpl implements CartService {
 
 	@Override
 	public String removeAlItemFromCart(String userId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		String responseCode = ResponseCode.FAILURE.toString();
+		String query = "DELETE FROM CART_ITEMS WHERE USERID=?";
 
+		try {
+			Connection connection = DBUtil.getConnection();
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, userId);
+			
+			int response = ps.executeUpdate();
+			if (response > 0) {
+				responseCode = ResponseCode.SUCCESS.toString();
+			}
+			ps.close();
+		}
+
+		catch (SQLException | FoodException e) {
+			responseCode += " : " + e.getMessage();
+		}
+		return responseCode;
+	}
 }

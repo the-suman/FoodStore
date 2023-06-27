@@ -6,5 +6,5 @@ public interface PaymentService {
 
 	public String savePaymentDetailsAndGenerateId(PaymentDetails paymentDetails);
 
-	public PaymentDetails getPaymentByUserId();
+	public PaymentDetails getPaymentByUserId(String userId);
 }
