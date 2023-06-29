@@ -80,10 +80,12 @@ public class PlaceOrder extends HttpServlet {
 		
 		new CartServiceImpl().removeAlItemFromCart(userId);
 		
-		pageName = "error.jsp";
+		pageName = "orders.jsp";
 		//display the order details
 		
-		res.sendRedirect(pageName+"?errorMessage=Order Placed successfully with transaction Id: "+orderId);
+//		res.sendRedirect(pageName+"?errorMessage=Order Placed successfully with transaction Id: "+orderId);
+		res.sendRedirect(pageName+"?orderid="+orderId+"&transactionid="+paymentId);
+
 	}
 
 	private boolean validateCardDetails(String cvvNumber) {

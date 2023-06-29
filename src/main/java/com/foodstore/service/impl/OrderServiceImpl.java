@@ -88,4 +88,10 @@ public class OrderServiceImpl implements OrderService {
 		return 0;
 	}
 
+	@Override
+	public List<OrderDetails> getAllOrderDetailsByUserId(String userEmailId) {
+		
+		return null;
+	}
+
 }

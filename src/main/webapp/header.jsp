@@ -85,7 +85,7 @@
 									</c:if>
 								</button></li>
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
-									type="button" onclick="location.href='orders.jsp'"><i class="fa fa-shopping-bag fa-fw"></i> Orders</button></li>
+									type="button" onclick="location.href='orderDetails.jsp'"><i class="fa fa-shopping-bag fa-fw"></i> Orders</button></li>
 
 							<li class="nav-item"><button class="btn btn-dark fw-bold"
 									type="button" onclick="location.href='about.jsp'">

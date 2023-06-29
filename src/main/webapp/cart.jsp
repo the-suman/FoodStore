@@ -108,7 +108,7 @@
 										Item item = new ItemServiceImpl().getItemById(cartItem.getItemId());
 										request.setAttribute("cartitem", cartItem);
 										request.setAttribute("item", item);
-										totalPrice += item.getPrice();
+										totalPrice += (item.getPrice()*cartItem.getQty());
 									%>
 
 									<jsp:include page="cartitem.jsp" />
@@ -205,7 +205,7 @@
 												
 												<button type="submit" class="btn btn-info btn-block btn-lg">
 													<div class="d-flex justify-content-between">
-														<span>$<%=totalPrice%></span> <span>Checkout <i
+														<span>$<%=totalPrice%></span> <span> &nbsp; Checkout <i
 															class="fas fa-long-arrow-alt-right ms-2"></i></span>
 													</div>
 												</button>

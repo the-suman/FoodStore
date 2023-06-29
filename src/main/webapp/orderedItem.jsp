@@ -54,7 +54,11 @@
 				</div>
 				<div
 					class="col-md-2 text-center d-flex justify-content-center align-items-center">
-					<p class="text-muted mb-0 small">$<%=item.getPrice()%></p>
+					<p class="text-muted mb-0 small">$<%=item.getPrice() %></p>
+				</div>
+				<div
+					class="col-md-2 text-center d-flex justify-content-center align-items-center">
+					<p class="text-muted mb-0 small">$<%=item.getPrice()*cartItem.getQty()%></p>
 				</div>
 				<div
 					class="col-md-2 text-center d-flex justify-content-center align-items-center">

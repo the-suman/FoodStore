@@ -60,10 +60,15 @@
 							class="fa fa-plus"></span>
 						</a>
 					</div>
-
+					
 					<div style="width: 80px;">
 						<h5 class="mb-0">
 							$<%=item.getPrice()%></h5>
+					</div>
+					
+					<div style="width: 80px;">
+						<h5 class="mb-0">
+							$<%=item.getPrice()*cartItem.getQty()%></h5>
 					</div>
 					<a
 						href="cartupdate?action=remove&id=<%=item.getItemId()%>&origin=cart.jsp"

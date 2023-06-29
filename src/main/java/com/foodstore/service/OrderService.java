@@ -16,8 +16,8 @@ public interface OrderService {
 	public String paymentSuccess(String userName, double paidAmount);
 	public int countSoldItem(String prodId);
 	
-//	public List<OrderDetails> getAllOrderDetailsByUserId(String userEmailId);
-//	
+	public List<OrderDetails> getAllOrderDetailsByUserId(String userEmailId);
+	
 //	public List<OrderDetails> getAllOrderDetails();
 	
 //	public boolean addOrder(OrderBean order);
