@@ -83,34 +83,34 @@
 							<div class="d-flex justify-content-between pt-2">
 								<p class="fw-bold mb-0">Order Details</p>
 								<p class="text-muted mb-0">
-									<span class="fw-bold me-4">Total</span> $<%=totalPrice%>
+									<span class="fw-bold me-2">Total: </span> $<%=totalPrice%>
 								</p>
 							</div>
 
 							<div class="d-flex justify-content-between pt-2">
 								<p class="text-muted mb-0">
-									OrderId:
+									<span class="fw-bold me-2">OrderId:</span>
 									<%=orderId%></p>
 								<p class="text-muted mb-0">
-									<span class="fw-bold me-4">Discount</span> $0.00
+									<span class="fw-bold me-2">Discount: </span> $0.00
 								</p>
 							</div>
 
 							<div class="d-flex justify-content-between">
 								<p class="text-muted mb-0">
-									Order Date :
+									<span class="fw-bold me-2">Order Date:</span>
 									<%=new Date(System.currentTimeMillis())%></p>
 								<p class="text-muted mb-0">
-									<span class="fw-bold me-4">GST </span> 0
+									<span class="fw-bold me-2">GST: </span> 0
 								</p>
 							</div>
 
 							<div class="d-flex justify-content-between mb-5">
 								<p class="text-muted mb-0">
-									Transaction Id :
+									<span class="fw-bold me-2">Transaction Id:</span>
 									<%=transactionId%></p>
 								<p class="text-muted mb-0">
-									<span class="fw-bold me-4">Delivery Charges</span> Free
+									<span class="fw-bold me-2">Delivery Charges: </span> Free
 								</p>
 							</div>
 						</div>

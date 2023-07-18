@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*, java.io.*"
 	import="com.foodstore.util.*, com.foodstore.enums.*"
-	import="com.foodstore.model.*, com.foodstore.service.impl.*"%>
+	import="com.foodstore.model.*, com.foodstore.service.* ,com.foodstore.service.impl.*"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,43 +15,59 @@
 </head>
 <body>
 	<%
-	
+		boolean isLoggedInAsCustomer = FoodUtil.isLoggedIn(request, Role.CUSTOMER);
+		request.setAttribute("isLoggedInAsCustomer", isLoggedInAsCustomer);
+		User user = FoodUtil.getCurrentUser(request);
+		String userId= user.getUserId();
+		OrderService os= new OrderServiceImpl();
+		List<OrderHistory> orders= os.getAllOrderDetailsByUserId(userId);
 	%>
 	<!--  Include the header to the page -->
 	<jsp:include page="header.jsp" flush="true" />
 	
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-
-	<div class="text-center"
-		style="color: green; font-size: 24px; font-weight: bold;">Order
-		Details</div>
-	<div class="container">
-		<div class="table-responsive ">
-			<table class="table table-hover table-sm">
-				<thead class="table-dark">
-					<th>Picture</th>
-					<th>Product Name</th>
-					<th>OrderId</th>
-					<th>Quantity</th>
-					<th>Price</th>
-					<th>Time</th>
-					<th>Status</th>
-				</thead>
-				<tbody>
-					<tr>
-						<td>Alfreds Futterkiste</td>
-						<td>Maria Anders</td>
-						<td>Germany</td>
-					</tr>
-					<tr>
-						<td>Centro comercial Moctezuma</td>
-						<td>Francisco Chang</td>
-						<td>Mexico</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
+	<c:choose>
+		<c:when test="${isLoggedInAsCustomer}">
+			<div class="text-center"
+				style="color: green; font-size: 24px; font-weight: bold;">Order
+				Details</div>
+			<div class="container">
+				<div class="table-responsive ">
+					<table class="table table-hover table-sm">
+						<thead class="table-dark">
+							<th>OrderId</th>
+							<th>TransactionId</th>
+							<th>Amount</th>
+							<th>Date</th>
+							<th>Time</th>
+							<th>Status</th>
+						</thead>
+						<tbody>
+							<%
+							for(OrderHistory order: orders){
+							%>
+							<tr>
+								<td><%=order.getOrderId()%></td>
+								<td><%=order.getPaymentId()%></td>
+								<td>$<%=order.getTotalAmount()%></td>
+								<td><%=order.getDate()%></td>
+								<td><%=order.getTime()%></td>
+								<td><%=order.getOrderStatus()%></td>
+							</tr>
+							
+							<%
+								}
+							%>
+							
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<jsp:forward page="login.jsp"></jsp:forward>
+		</c:otherwise>
+	</c:choose>
 	<!--  Include the footer to the page-->
 	<%@ include file="footer.jsp"%>
 </body>

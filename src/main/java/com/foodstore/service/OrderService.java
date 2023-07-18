@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.foodstore.enums.OrderStatus;
 import com.foodstore.model.OrderDetails;
+import com.foodstore.model.OrderHistory;
 
 public interface OrderService {
 	
@@ -16,9 +17,9 @@ public interface OrderService {
 	public String paymentSuccess(String userName, double paidAmount);
 	public int countSoldItem(String prodId);
 	
-	public List<OrderDetails> getAllOrderDetailsByUserId(String userEmailId);
+	public List<OrderHistory> getAllOrderDetailsByUserId(String userEmailId);
 	
-//	public List<OrderDetails> getAllOrderDetails();
+	public List<OrderDetails> getAllOrderDetails();
 	
 //	public boolean addOrder(OrderBean order);
 //	public boolean addTransaction(TransactionBean transaction);

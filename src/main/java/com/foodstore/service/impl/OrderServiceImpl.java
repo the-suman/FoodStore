@@ -7,10 +7,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.foodstore.enums.FoodType;
 import com.foodstore.enums.OrderStatus;
 import com.foodstore.enums.ResponseCode;
 import com.foodstore.exception.FoodException;
 import com.foodstore.model.OrderDetails;
+import com.foodstore.model.OrderHistory;
+import com.foodstore.model.OrderItemHistory;
 import com.foodstore.service.OrderService;
 import com.foodstore.util.DBUtil;
 
@@ -88,10 +91,82 @@ public class OrderServiceImpl implements OrderService {
 		return 0;
 	}
 
+	
+
 	@Override
-	public List<OrderDetails> getAllOrderDetailsByUserId(String userEmailId) {
+	public List<OrderDetails> getAllOrderDetails() {
+		List<OrderDetails> orderList = null;
+
+		try {
+			Connection conn = DBUtil.getConnection();
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM OrderDetails");
+			
+			ResultSet rs = ps.executeQuery();
+			orderList = new ArrayList<OrderDetails>();
+			while (rs.next()) {
+				OrderDetails orderDetail = new OrderDetails();
+				orderDetail.setOrderId(rs.getString("orderId"));
+				orderDetail.setUserId(rs.getString("userId"));
+				orderDetail.setPaymentId(rs.getString("paymentId"));
+				orderDetail.setTotalDiscount(rs.getDouble("totalDiscount"));
+				orderDetail.setTotalAmount(rs.getDouble("totalAmount"));
+				orderDetail.setOrderStatus(OrderStatus.valueOf(rs.getString("orderStatus")));
+				orderList.add(orderDetail);
+			}
+			ps.close();
+		} catch (SQLException | FoodException e) {
+			System.out.println(e.getMessage());
+			throw new FoodException(e.getMessage());
+		}
+		return orderList;
 		
-		return null;
+	}
+
+	@Override
+	public List<OrderHistory> getAllOrderDetailsByUserId(String userEmailId) {
+		List<OrderHistory> orderList = null;
+
+		try {
+			Connection conn = DBUtil.getConnection();
+			PreparedStatement ps = conn.prepareStatement("select  paymentdetails.paymentid as paymentid, orderid, totalAmount, orderStatus, date, time from OrderDetails, paymentdetails where OrderDetails.paymentId= paymentdetails.paymentId and OrderDetails.userId=?");
+			ps.setString(1, userEmailId);
+			ResultSet rs = ps.executeQuery();
+			orderList = new ArrayList<OrderHistory>();
+			while (rs.next()) {
+				OrderHistory orderDetail = new OrderHistory();
+				orderDetail.setOrderId(rs.getString("orderId"));
+				orderDetail.setPaymentId(rs.getString("paymentId"));
+				orderDetail.setTotalAmount(rs.getDouble("totalAmount"));
+				orderDetail.setTime(rs.getString("TIME"));
+				orderDetail.setDate(rs.getDate("DATE"));
+				orderDetail.setOrderStatus(OrderStatus.valueOf(rs.getString("orderStatus")));
+				PreparedStatement ps2 = conn.prepareStatement("select  order_items.itemid as itemid, Order_items.qty as qty,  order_items.unitprice as unitprice, name, description, vegeterian, image from order_items, item where order_items.itemid=item.itemid and order_items.orderid=?");
+				ps2.setString(1, orderDetail.getOrderId());
+				ResultSet rs2= ps2.executeQuery();
+				List<OrderItemHistory> items= new ArrayList<OrderItemHistory>();
+				while(rs2.next()) {
+					OrderItemHistory item= new OrderItemHistory();
+					item.setItemId(rs2.getString("itemId"));
+					item.setName(rs2.getString("name"));
+					item.setQty(rs2.getInt("qty"));
+//					String types = rs.getString("type");
+//					item.setType(FoodType.valueOf(types));
+					item.setUnitPrice(rs2.getDouble("unitPrice"));
+					item.setVegeterian(rs2.getInt("vegeterian"));
+					item.setDescription(rs2.getString("description"));
+					item.setImage(rs2.getBytes("image"));
+					items.add(item);
+				}
+				orderDetail.setItems(items);
+				orderList.add(orderDetail);
+				
+			}
+			ps.close();
+		} catch (SQLException | FoodException e) {
+			System.out.println(e.getMessage());
+			throw new FoodException(e.getMessage());
+		}
+		return orderList;
 	}
 
 }
