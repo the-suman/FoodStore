@@ -47,31 +47,15 @@
 				<div class="d-flex flex-row align-items-center">
 
 					<div class="d-flex mr-2 mx-3 my-1"style="">
-						<a
-							href="cartupdate?action=minus&id=<%=orderItem.getItemId()%>&cartQty=<%=orderItem.getQty()%>&origin=cart.jsp"
-							type="button" class="btn btn-danger py-0 px-1"> <span
-							class="fa fa-minus"></span>
-						</a>
-						<h5 class="fw-normal mb-0 mx-1"><%=orderItem.getQty()%></h5>
-						<a
-							href="cartupdate?action=plus&id=<%=orderItem.getItemId()%>&cartQty=<%=orderItem.getQty()%>&origin=cart.jsp"
-							type="button" class="btn btn-info px-1 py-0"> <span
-							class="fa fa-plus"></span>
-						</a>
+					
+						<h5 class="fw-normal mb-0 mx-4">Qty: <%=orderItem.getQty()%></h5>
 					</div>
 					
-					<div style="width: 80px;">
+					<div style="">
 						<h5 class="mb-0">
-							$<%=orderItem.getUnitPrice()%></h5>
+							Price: $<%=orderItem.getUnitPrice()%></h5>
 					</div>
 					
-					<div style="width: 80px;">
-						<h5 class="mb-0">
-							$<%=orderItem.getUnitPrice()*orderItem.getQty()%></h5>
-					</div>
-					<a
-						href="cartupdate?action=remove&id=<%=orderItem.getItemId()%>&origin=cart.jsp"
-						style="color: #cecece;"><i class="fas fa-trash-alt"></i></a>
 				</div>
 			</div>
 		</div>

@@ -38,7 +38,7 @@
 	<div class="container">
 		<div class="table-responsive ">
 			<table class="table table-hover table-sm">
-				<thead class="table-dark">
+				<thead class="table-dark" style="border: 5px solid blue">
 					<tr>
 						<th>OrderId</th>
 						<th>TransactionId</th>
@@ -48,10 +48,11 @@
 						<th>Status</th>
 					</tr>
 				</thead>
-				<tbody>
-					<%
-					for (OrderHistory order : orders) {
-					%>
+
+				<%
+				for (OrderHistory order : orders) {
+				%>
+				<tbody style="border: 5px solid blue">
 					<tr>
 						<td><%=order.getOrderId()%></td>
 						<td><%=order.getPaymentId()%></td>
@@ -69,10 +70,13 @@
 					</tr>
 					<%
 					}
-					}
 					%>
-
 				</tbody>
+				<%
+				}
+				%>
+
+
 			</table>
 		</div>
 	</div>
