@@ -23,9 +23,9 @@
 	/* boolean isLoggedInAsCustomer = FoodUtil.isLoggedIn(request, Role.CUSTOMER);
 	request.setAttribute("isLoggedInAsCustomer", isLoggedInAsCustomer); */
 	User user = FoodUtil.getCurrentUser(request);
-	String userId = user.getUserId();
+	String orderId = request.getParameter("orderid");
 	OrderService os = new OrderServiceImpl();
-	List<OrderHistory> orders = os.getAllOrderDetailsByUserId(userId);
+	List<OrderHistory> orders = os.getAllOrderDetailsByOrderId(orderId);
 	%>
 	<!--  Include the header to the page -->
 	<jsp:include page="header.jsp" flush="true" />

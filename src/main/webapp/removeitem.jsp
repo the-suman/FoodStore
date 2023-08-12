@@ -1,118 +1,66 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+	import="com.foodstore.model.*, com.foodstore.service.*, 
+	com.foodstore.service.impl.*, com.foodstore.util.*, com.foodstore.enums.*"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-<title>Login Form</title>
+<title>Food Item</title>
 <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://kit.fontawesome.com/133ab84eeb.js"></script>
 <link href="css/styles.css" rel="stylesheet">
-<style>
-/* body {
-	background-image: url('cake.jpg');
-	background-size: cover;
-} */
-</style>
 </head>
 <body>
-	<%@ include file="header.jsp"%>
+	<%
+	User user = FoodUtil.getCurrentUser(request);
+	%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-	<div class="container mt-5">
-		<div class="row  offset-md-4">
-			<div class="shadow-lg col-md-6 bg-light rounded-3">
-				<!-- style="border-radius: 10px; border: 2px solid black" -->
-				<div class="text-center fw-bold text-light my-3">
-					<span
-						class="bordered rounded shadow-sm py-1 d-inline px-3 bg-secondary">LOGIN
-						TO FOODKART</span>
+	<jsp:include page="header.jsp" />
+	<%
+	String message = request.getParameter("message");
+	%>
+	
+	<div class="container">
+		<div class="row justify-content-center my-2 mx-2 p-1">
+			
+			<form action="./RemoveItemServlet" method="post"
+				class="col-md-4 col-md-offset-4"
+				style="border: 2px solid black; border-radius: 10px; background-color: #FFE5CC; padding: 10px;">
+				<div style="font-weight: bold;" class="text-center">
+					<h3 style="color: green;">Item Deletion Form</h3>
+					<%
+					if (message != null) {
+					%>
+					<p style="color: blue;">
+						<%=message%>
+					</p>
+					<%
+					}
+					%>
 				</div>
-				<!-- Show Success Message -->
-				<c:if test="${not empty param.successMessage}">
-					<div class="text-center my-3 ">
-						<label class="text-success"><%=request.getParameter("successMessage")%></label>
+				<div></div>
+				<div class="row my-2">
+					<div class="col-md-12 form-group">
+						<label for="last_name">Item Id</label> <input type="text"
+							placeholder="Enter Item Id" name="itemid" class="form-control"
+							id="last_name" required>
 					</div>
-				</c:if>
-				<form action="login" method="post">
-					<!-- Email input -->
-					<div class="form-outline my-3">
-						<input type="text" id="form2Example1" class="form-control"
-							name="username" placeholder="Enter Email address" />
+				</div>
+				<div class="row">
+					<div class="col-md-6 text-center" style="margin-bottom: 2px;">
+						<a href="adminViewProduct.jsp" class="btn btn-info">Cancel</a>
 					</div>
-
-					<!-- Password input -->
-					<div class="form-outline my-3">
-						<input type="password" id="form2Example2" class="form-control"
-							name="password" placeholder="Enter Password" onchange="" />
-
+					<div class="col-md-6 text-center">
+						<button type="submit" class="btn btn-danger">Remove
+							Product</button>
 					</div>
-
-					<!-- User type input -->
-					<div class="btn-group btn-group-toggle mx-2 " data-toggle="buttons">
-						<label class="btn btn-success active"> <input type="radio"
-							name="usertype" value="CUSTOMER" autocomplete="off" checked>
-							Login As Customer
-						</label> <label class="btn btn-info"> <input type="radio"
-							name="usertype" value="ADMIN" autocomplete="off">Login As
-							Admin
-						</label>
-					</div>
-
-					<!-- 2 column grid layout for inline styling -->
-					<div class="row my-3">
-						<div class="col d-flex justify-content-center">
-							<!-- Checkbox -->
-							<div class="form-check">
-								<input class="form-check-input" type="checkbox" value=""
-									name="rememberme" id="form2Example31" checked /> <label
-									class="form-check-label" for="form2Example31"> Remember
-									me </label>
-							</div>
-						</div>
-						<div class="col">
-							<!-- Simple link -->
-							<a href="#!">Forgot password?</a>
-						</div>
-					</div>
-
-					<!-- Register buttons -->
-					<div class="text-center">
-						<!-- Submit button -->
-						<input type="submit" value="SignIn" style="width: 100%"
-							class="btn btn-primary input-block-level " />
-						<!-- Show Error Message -->
-						<c:if test="${not empty param.errorMessage}">
-							<div class="text-center my-3 ">
-								<label class="text-danger"><%=request.getParameter("errorMessage")%></label>
-							</div>
-						</c:if>
-						<p>
-							Not a member? <a href="register.jsp">Register</a>
-						</p>
-						<p>or sign up with:</p>
-						<button type="button" class="btn btn-link btn-floating mx-1">
-							<i class="fab fa-facebook-f"></i>
-						</button>
-
-						<button type="button" class="btn btn-link btn-floating mx-1">
-							<i class="fab fa-google"></i>
-						</button>
-
-						<button type="button" class="btn btn-link btn-floating mx-1">
-							<i class="fab fa-twitter"></i>
-						</button>
-
-						<button type="button" class="btn btn-link btn-floating mx-1">
-							<i class="fab fa-github"></i>
-						</button>
-					</div>
-				</form>
-			</div>
+				</div>
+			</form>
 		</div>
 	</div>
 	<%@ include file="footer.jsp"%>
-
 </body>
 </html>

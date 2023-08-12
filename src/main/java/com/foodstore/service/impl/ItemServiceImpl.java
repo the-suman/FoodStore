@@ -79,6 +79,26 @@ public class ItemServiceImpl implements ItemService {
 	}
 
 	@Override
+	public String addItem(String itemName, String itemType, String description, double price, int quantity,int vegeterian,
+			byte[] itemImage) {
+		String status = null;
+		String itemId = FoodUtil.generateUniqueId();
+		String storeId = "ec5007fb-ba15-4f43-add4-76edc7522132";
+		Item item = new Item();
+		item.setItemId(itemId);
+		item.setStoreId(storeId);
+		item.setName(itemName);
+		item.setType(FoodType.valueOf(itemType));
+		item.setDescription(description);
+		item.setPrice(price);
+		item.setQty(quantity);
+		item.setVegeterian(vegeterian);
+		item.setImage(itemImage);
+		status = addItem(item);
+		return status;
+	}
+	
+	@Override
 	public String addItem(Item item) throws FoodException {
 		String responseCode = ResponseCode.FAILURE.toString();
 		String query = "INSERT INTO ITEM VALUES (?,?,?,?,?,?,?,?,?)";
@@ -86,7 +106,7 @@ public class ItemServiceImpl implements ItemService {
 		try {
 			Connection connection = DBUtil.getConnection();
 			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setString(1, FoodUtil.generateUniqueId());
+			ps.setString(1, item.getItemId());
 			ps.setString(2, item.getStoreId());
 			ps.setString(3, item.getName());
 			ps.setString(4, item.getType().toString());
@@ -95,6 +115,11 @@ public class ItemServiceImpl implements ItemService {
 			ps.setInt(7, item.getQty());
 			ps.setInt(8, item.getVegeterian());
 			ps.setBlob(9, FoodUtil.convertToBlob(item.getImage()));
+			int response = ps.executeUpdate();
+			if (response > 0) {
+				responseCode = ResponseCode.SUCCESS.toString();
+			}
+			ps.close();
 
 		} catch (SQLException e) {
 			responseCode += " : " + e.getMessage();
@@ -125,7 +150,7 @@ public class ItemServiceImpl implements ItemService {
 	@Override
 	public String updateItem(Item item) throws FoodException {
 		String responseCode = ResponseCode.FAILURE.toString();
-		String query = "UPDATE ITEM SET STOREID=?, NAME=?, TYPE=?, DESCRIPTION=?, PRICE=?, QTY=?, VEGETERIAN=?, IMAGE=? WHERE ITEMID=?";
+		String query = "UPDATE ITEM SET STOREID=?, NAME=?, TYPE=?, DESCRIPTION=?, PRICE=?, QTY=?, VEGETERIAN=? WHERE ITEMID=?";
 		try {
 			Connection connection = DBUtil.getConnection();
 			PreparedStatement ps = connection.prepareStatement(query);
@@ -137,8 +162,8 @@ public class ItemServiceImpl implements ItemService {
 			ps.setDouble(5, item.getPrice());
 			ps.setInt(6, item.getQty());
 			ps.setInt(7, item.getVegeterian());
-			ps.setBlob(8, FoodUtil.convertToBlob(item.getImage()));
-			ps.setString(9, item.getItemId());
+//			ps.setBlob(8, FoodUtil.convertToBlob(item.getImage()));
+			ps.setString(8, item.getItemId());
 
 			int response = ps.executeUpdate();
 			if (response > 0) {
@@ -161,7 +186,7 @@ public class ItemServiceImpl implements ItemService {
 			ps.setString(1, type);
 			ResultSet rs = ps.executeQuery();
 			items = new ArrayList<Item>();
-			while(rs.next()) {
+			while (rs.next()) {
 				Item item = new Item();
 				item.setItemId(rs.getString("itemId"));
 				item.setStoreId(rs.getString("storeId"));
@@ -176,7 +201,7 @@ public class ItemServiceImpl implements ItemService {
 				items.add(item);
 			}
 			ps.close();
-		}catch(SQLException | FoodException e) {
+		} catch (SQLException | FoodException e) {
 			System.out.println(e.getMessage());
 			throw new FoodException(e.getMessage());
 		}
@@ -190,14 +215,14 @@ public class ItemServiceImpl implements ItemService {
 		try {
 			Connection connection = DBUtil.getConnection();
 			PreparedStatement ps = connection.prepareStatement(query);
-			text = "%" + text+ "%";
+			text = "%" + text + "%";
 			ps.setString(1, text);
 			ps.setString(2, text);
 			ps.setString(3, text);
-			
+
 			ResultSet rs = ps.executeQuery();
 
-			while(rs.next()) {
+			while (rs.next()) {
 				Item item = new Item();
 				item.setItemId(rs.getString("itemId"));
 				item.setStoreId(rs.getString("storeId"));
@@ -209,15 +234,102 @@ public class ItemServiceImpl implements ItemService {
 				item.setQty(rs.getInt("qty"));
 				item.setVegeterian(rs.getInt("vegeterian"));
 				item.setImage(rs.getBytes("image"));
-				
+
 				items.add(item);
 			}
 			ps.close();
-		}catch(SQLException | FoodException e) {
+		} catch (SQLException | FoodException e) {
 			System.out.println(e.getMessage());
 			throw new FoodException(e.getMessage());
 		}
 		return items;
 	}
+
+	@Override
+	public Item getProductDetails(String itemId) {
+		Item item = null;
+
+		Connection conn = DBUtil.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = conn.prepareStatement("SELECT * FROM ITEM WHERE ITEMID = ?");
+			ps.setString(1, itemId);
+			rs = ps.executeQuery();
+
+			if (rs.next()) {
+				item = new Item();
+				item.setItemId(rs.getString("itemId"));
+				item.setStoreId(rs.getString("storeId"));
+				item.setName(rs.getString("name"));
+				item.setType(FoodType.valueOf(rs.getString("type")));
+				item.setDescription(rs.getString("description"));
+				item.setPrice(rs.getDouble("price"));
+				item.setQty(rs.getInt("qty"));
+				item.setVegeterian(rs.getInt("vegeterian"));
+				item.setImage(rs.getBytes("image"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return item;
+	}
+
+	@Override
+	public String updateItemWithoutImage(String prevItemId, Item updateItem) {
+		String status = "Product Updation Failed!";
+		
+		if(!prevItemId.equals(updateItem.getItemId())) {
+			status = "Both Products are Different, Updation Failed!";
+			return status;
+		}
+		int prevQty = new ItemServiceImpl().getItemQuantity(prevItemId);
+		Connection conn = DBUtil.getConnection();
+		PreparedStatement ps = null;
+		
+		try {
+			ps= conn.prepareStatement("UPDATE ITEM SET STOREID=?, NAME=?, TYPE=?, DESCRIPTION=?, PRICE=?, QTY=?, VEGETERIAN=? WHERE ITEMID=?");
+			
+			ps.setString(1, updateItem.getStoreId());
+			ps.setString(2, updateItem.getName());
+			ps.setString(3, updateItem.getType().toString());
+			ps.setString(4, updateItem.getDescription());
+			ps.setDouble(5, updateItem.getPrice());
+			ps.setInt(6, updateItem.getQty());
+			ps.setInt(7, updateItem.getVegeterian());
+			ps.setString(8, updateItem.getItemId());
+			
+			int res= ps.executeUpdate();
+			if((res>0) && prevQty < updateItem.getQty()) {
+				status = "Product Updated Successfully!";
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public Integer getItemQuantity(String itemId) {
+		int quantity = 0;
+		Connection con = DBUtil.getConnection();
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			ps = con.prepareStatement("select qty from Item where itemId=?");
+			ps.setString(1, itemId);
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				quantity = rs.getInt("qty");
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return quantity;
+	}
+
+	
 
 }

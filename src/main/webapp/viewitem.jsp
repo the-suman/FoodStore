@@ -18,8 +18,7 @@
 	User user = FoodUtil.getCurrentUser(request);
 	String itemId= request.getParameter("id");
 	Item item = new ItemServiceImpl().getProductDetails(itemId);
-	if(item == null || itemId == null){
-		response.sendRedirect("updateitembyid.jsp?message=Please Enter a valid product Id");
+	if(item == null){
 		return;
 	}
 	%>
@@ -37,7 +36,7 @@
 					<div class="form-group">
 						<img src="<%=FoodUtil.showImage(item.getImage())%>"
 							alt="Product Image" height="100px" />
-						<h2 style="color: green;">Product Update Form</h2>
+						<h2 style="color: green;">Product Details</h2>
 					</div>
 
 					<%
@@ -51,79 +50,56 @@
 					%>
 				</div>
 				<div class="row">
-					<input type="hidden" name="itemid" class="form-control"
-						value="<%=item.getItemId()%>" id="last_name" required>
+					<input type="hidden" readonly name="itemid" class="form-control"
+						value="<%=item.getItemId()%>" id="last_name" readonly>
 				</div>
 				<div class="row">
 					<div class="col-md-6 form-group">
 						<label for="last_name">Product Name</label> <input type="text"
 							placeholder="Enter Product Name" name="name" class="form-control"
-							value="<%=item.getName()%>" id="last_name" required>
+							value="<%=item.getName()%>" id="last_name" readonly>
 					</div>
 					<div class="col-md-6 form-group">
 						<%
 						String itemtype = item.getType().toString();
 						%>
-						<label for="type">Item Type</label> <select name="type"
-							id="type" class="form-control" required>
-							<option value="DRINKS"
-								<%="DRINKS".equalsIgnoreCase(itemtype) ? "selected" : ""%>>DRINKS</option>
-							<option value="DESSERT"
-								<%="DESSERT".equalsIgnoreCase(itemtype) ? "selected" : ""%>>DESSERT</option>
-							<option value="INDIAN"
-								<%="INDIAN".equalsIgnoreCase(itemtype) ? "selected" : ""%>>INDIAN</option>
-							<option value="CHINESE"
-								<%="CHINESE".equalsIgnoreCase(itemtype) ? "selected" : ""%>>CHINESE</option>
-							<option value="CONTINENTAL"
-								<%="CONTINENTAL".equalsIgnoreCase(itemtype) ? "selected" : ""%>>CONTINENTAL</option>
-							<%-- <option value="speaker"
-								<%="speaker".equalsIgnoreCase(itemtype) ? "selected" : ""%>>SPEAKER</option> --%>
-							<option value="other"
-								<%="other".equalsIgnoreCase(itemtype) ? "selected" : ""%>>Some
-								Other Item</option>
-						</select>
+						<label for="last_name">Item Type </label> 
+						<input type="text" name="itemid" class="form-control"
+						value="<%=itemtype %>" id="last_name" readonly>
 					</div>
 				</div>
 				<div class="form-group">
 					<label for="last_name">Product Description</label>
 					<textarea name="description" class="form-control text-align-left"
-						id="last_name" required><%=item.getDescription()%></textarea>
+						id="last_name" readonly><%=item.getDescription()%></textarea>
 				</div>
 				<div class="row">
 					<div class="col-md-6 form-group">
 						<label for="last_name">Unit Price</label> <input type="number"
 							value="<%=item.getPrice()%>"
 							placeholder="Enter Unit Price" name="price" class="form-control"
-							id="last_name" required>
+							id="last_name" readonly>
 					</div>
 					<div class="col-md-6 form-group">
 						<label for="last_name">Stock Quantity</label> <input type="number"
 							value="<%=item.getQty()%>"
 							placeholder="Enter Stock Quantity" class="form-control"
-							id="last_name" name="qty" required>
+							id="last_name" name="qty" readonly>
 					</div>
 					<div class="col-md-6 form-group">
 						<label for="last_name">Store Id</label> <input type="text"
 							value="<%=item.getStoreId()%>"
 							placeholder="Enter Store Id" class="form-control"
-							id="last_name" name="storeid" required>
+							id="last_name" name="storeid" readonly>
 					</div>
 					<div class="col-md-6 form-group">
 						<label for="last_name">Vegetarian Type</label> <input type="number"
 							value="<%=item.getVegeterian() %>"
 							placeholder="Enter Vegeterian Type" class="form-control"
-							id="last_name" name="vegeterian" required>
+							id="last_name" name="vegeterian" readonly>
 					</div>
 				</div>
-				<div class="row text-center my-2">
-					<div class="col-md-4" style="margin-bottom: 2px;">
-						<button formaction="adminViewProduct.jsp" class="btn btn-danger">Cancel</button>
-					</div>
-					<div class="col-md-4">
-						<button type="submit" class="btn btn-success">Update
-							Product</button>
-					</div>
-				</div>
+				
 			</form>
 		</div>
 	</div>

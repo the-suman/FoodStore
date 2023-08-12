@@ -22,10 +22,9 @@
 
 	/* boolean isLoggedInAsCustomer = FoodUtil.isLoggedIn(request, Role.CUSTOMER);
 	request.setAttribute("isLoggedInAsCustomer", isLoggedInAsCustomer); */
-	User user = FoodUtil.getCurrentUser(request);
-	String userId = user.getUserId();
+	/* User user = FoodUtil.getCurrentUser(request);
+	String userId = user.getUserId(); */
 	OrderService os = new OrderServiceImpl();
-	List<OrderHistory> orders = os.getAllOrderDetailsByUserId(userId);
 	%>
 	<!--  Include the header to the page -->
 	<jsp:include page="header.jsp" flush="true" />
@@ -42,41 +41,41 @@
 					<tr>
 						<th>OrderId</th>
 						<th>TransactionId</th>
-						<th>Amount</th>
-						<th>Date</th>
-						<th>Time</th>
+						<th>User Email Id</th>
+						<th>Action</th>
 						<th>Status</th>
+						
 					</tr>
 				</thead>
 
 				<%
-				for (OrderHistory order : orders) {
-				%>
-				<tbody style="border: 3px solid black;">
-					<tr style="background-color: #eddce8;">
-						<td><%=order.getOrderId()%></td>
-						<td><%=order.getPaymentId()%></td>
-						<td>$<%=order.getTotalAmount()%></td>
-						<td><%=order.getDate()%></td>
-						<td><%=order.getTime()%></td>
-						<td><%=order.getOrderStatus()%></td>
-					</tr>
-					<%
-					for (OrderItemHistory orderItem : order.getItems()) {
-						request.setAttribute("orderitemhistory", orderItem);
+					OrderServiceImpl orderdao = new OrderServiceImpl();
+					List<OrderBean> orders = new ArrayList<OrderBean>();
+					orders = orderdao.getAllOrders();
+					int count=0;
+					for(OrderBean order: orders){
+						String transId = order.getTransactionId();
+						String orderId = order.getOrderId();
+						String userId = order.getUserId();
+						Double totalAmount = order.getAmount();
+						String orderStatus = order.getOrderStatus();
+					
 					%>
+				<tbody>
 					<tr>
-						<td colspan="6"><jsp:include page="orderitem.jsp" /></td>
+						<th><a href="vieworderdetail.jsp?orderid=<%=orderId %>"><%=orderId %></a></th>
+						<th><%=transId %></th>
+						<th><%=userId %></th>
+						<th><%=totalAmount %></th>
+						<th><%=orderStatus %></th>
+						
 					</tr>
-					<%
-					}
-					%>
 				</tbody>
+				
 				<%
-				}
+				} 
 				%>
-
-
+				
 			</table>
 		</div>
 	</div>

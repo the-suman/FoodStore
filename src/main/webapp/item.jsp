@@ -28,8 +28,9 @@
 	if (description == null)
 		description = "";
 	description = description.substring(0, Math.min(description.length(), 50));
+	String url= "viewitem.jsp?id="+item.getItemId();
 	if (description.length() == 50)
-		description += ".. <a href='#' style='text-decoration:none; font-size:12px;'>View Details</a>";
+		description += ".. <a href='"+url+"'style='text-decoration:none; font-size:12px;'>View Details</a>";
 	%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 

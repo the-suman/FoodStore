@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.foodstore.enums.FoodType;
 import com.foodstore.enums.OrderStatus;
 import com.foodstore.enums.ResponseCode;
 import com.foodstore.exception.FoodException;
+import com.foodstore.model.OrderBean;
 import com.foodstore.model.OrderDetails;
 import com.foodstore.model.OrderHistory;
 import com.foodstore.model.OrderItemHistory;
@@ -72,6 +72,7 @@ public class OrderServiceImpl implements OrderService {
 		return orderList;
 	}
 
+	
 	@Override
 	public String updateOrderStatus(String orderId, OrderStatus status) {
 
@@ -130,6 +131,79 @@ public class OrderServiceImpl implements OrderService {
 			Connection conn = DBUtil.getConnection();
 			PreparedStatement ps = conn.prepareStatement("select  paymentdetails.paymentid as paymentid, orderid, totalAmount, orderStatus, date, time from OrderDetails, paymentdetails where OrderDetails.paymentId= paymentdetails.paymentId and OrderDetails.userId=?");
 			ps.setString(1, userEmailId);
+			ResultSet rs = ps.executeQuery();
+			orderList = new ArrayList<OrderHistory>();
+			while (rs.next()) {
+				OrderHistory orderDetail = new OrderHistory();
+				orderDetail.setOrderId(rs.getString("orderId"));
+				orderDetail.setPaymentId(rs.getString("paymentId"));
+				orderDetail.setTotalAmount(rs.getDouble("totalAmount"));
+				orderDetail.setTime(rs.getString("TIME"));
+				orderDetail.setDate(rs.getDate("DATE"));
+				orderDetail.setOrderStatus(OrderStatus.valueOf(rs.getString("orderStatus")));
+				PreparedStatement ps2 = conn.prepareStatement("select  order_items.itemid as itemid, Order_items.qty as qty,  order_items.unitprice as unitprice, name, description, vegeterian, image from order_items, item where order_items.itemid=item.itemid and order_items.orderid=?");
+				ps2.setString(1, orderDetail.getOrderId());
+				ResultSet rs2= ps2.executeQuery();
+				List<OrderItemHistory> items= new ArrayList<OrderItemHistory>();
+				while(rs2.next()) {
+					OrderItemHistory item= new OrderItemHistory();
+					item.setItemId(rs2.getString("itemId"));
+					item.setName(rs2.getString("name"));
+					item.setQty(rs2.getInt("qty"));
+//					String types = rs.getString("type");
+//					item.setType(FoodType.valueOf(types));
+					item.setUnitPrice(rs2.getDouble("unitPrice"));
+					item.setVegeterian(rs2.getInt("vegeterian"));
+					item.setDescription(rs2.getString("description"));
+					item.setImage(rs2.getBytes("image"));
+					items.add(item);
+				}
+				orderDetail.setItems(items);
+				orderList.add(orderDetail);
+				
+			}
+			ps.close();
+		} catch (SQLException | FoodException e) {
+			System.out.println(e.getMessage());
+			throw new FoodException(e.getMessage());
+		}
+		return orderList;
+	}
+
+	@Override
+	public List<OrderBean> getAllOrders() {
+		List<OrderBean> orderList = new ArrayList<>();
+		try {
+			Connection conn = DBUtil.getConnection();
+			PreparedStatement ps = conn.prepareStatement("SELECT * FROM OrderDetails");
+			
+			ResultSet rs = ps.executeQuery();
+			
+			while (rs.next()) {
+				OrderBean order = new OrderBean();
+				order.setOrderId(rs.getString("orderId"));
+				order.setTransactionId(rs.getString("paymentId"));
+				order.setUserId(rs.getString("userId"));
+				order.setAmount(rs.getDouble("totalAmount"));
+				order.setOrderStatus(rs.getString("orderStatus"));
+				orderList.add(order);
+			}
+			ps.close();
+		} catch (SQLException | FoodException e) {
+			System.out.println(e.getMessage());
+			throw new FoodException(e.getMessage());
+		}
+		return orderList;
+	}
+
+	@Override
+	public List<OrderHistory> getAllOrderDetailsByOrderId(String orderId) {
+		List<OrderHistory> orderList = null;
+
+		try {
+			Connection conn = DBUtil.getConnection();
+			PreparedStatement ps = conn.prepareStatement("select  paymentdetails.paymentid as paymentid, orderid, totalAmount, orderStatus, date, time from OrderDetails, paymentdetails where OrderDetails.paymentId= paymentdetails.paymentId and OrderDetails.orderId=?");
+			ps.setString(1, orderId);
 			ResultSet rs = ps.executeQuery();
 			orderList = new ArrayList<OrderHistory>();
 			while (rs.next()) {

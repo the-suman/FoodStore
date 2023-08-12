@@ -166,7 +166,7 @@
 											Food Item</a></li>
 									<li><a class="dropdown-item" href="additem.jsp">Add
 											Food Item</a></li>
-									<li><a class="dropdown-item" href="updateitem.jsp">Update
+									<li><a class="dropdown-item" href="updateitembyid.jsp">Update
 											Food Item</a></li>
 									<li><a class="dropdown-item" href="removeitem.jsp">Remove
 											Food Item</a></li>

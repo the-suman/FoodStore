@@ -13,6 +13,7 @@ public interface ItemService {
 	//Get individual Item by Id
 	public Item getItemById(String itemId) throws FoodException;
 	
+	public String addItem(String itemName, String itemType, String description, double price, int quantity, int vegeterian, byte[] itemImage);
 	//Add Item 
 	public String addItem(Item item) throws FoodException;
 	
@@ -27,4 +28,11 @@ public interface ItemService {
 	
 	
 	public List<Item> searchItems(String text) throws FoodException;
+	
+	public String updateItemWithoutImage(String itemId, Item updateItem);
+	
+	public Item getProductDetails(String itemId);
+	
+	public Integer getItemQuantity(String itemId); 
 }
+
