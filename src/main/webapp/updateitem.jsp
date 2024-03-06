@@ -15,6 +15,11 @@
 </head>
 <body>
 	<%
+	String uri = request.getRequestURI();
+	String pagename = uri.substring(uri.lastIndexOf("/") + 1);
+	session.setAttribute("currentpage", pagename);
+	FoodUtil.validateCommonPageAccess(request);
+	
 	User user = FoodUtil.getCurrentUser(request);
 	String itemId= request.getParameter("id");
 	Item item = new ItemServiceImpl().getProductDetails(itemId);

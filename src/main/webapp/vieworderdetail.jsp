@@ -20,9 +20,6 @@
 	session.setAttribute("currentpage", pagename);
 	FoodUtil.validateCommonPageAccess(request);
 
-	/* boolean isLoggedInAsCustomer = FoodUtil.isLoggedIn(request, Role.CUSTOMER);
-	request.setAttribute("isLoggedInAsCustomer", isLoggedInAsCustomer); */
-	User user = FoodUtil.getCurrentUser(request);
 	String orderId = request.getParameter("orderid");
 	OrderService os = new OrderServiceImpl();
 	List<OrderHistory> orders = os.getAllOrderDetailsByOrderId(orderId);

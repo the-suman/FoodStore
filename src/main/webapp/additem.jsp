@@ -16,7 +16,10 @@
 
 <body>
 	<%
-	User user = FoodUtil.getCurrentUser(request);
+	String uri = request.getRequestURI();
+	String pagename = uri.substring(uri.lastIndexOf("/") + 1);
+	session.setAttribute("currentpage", pagename);
+	FoodUtil.validateCommonPageAccess(request);
 	%>
 
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>

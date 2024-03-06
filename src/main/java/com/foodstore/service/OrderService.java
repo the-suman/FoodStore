@@ -27,7 +27,7 @@ public interface OrderService {
 	
 	public List<OrderBean> getAllOrders();
 	
-	
+	public List<OrderBean> getAllOrdersByItemId(String itemId);
 //	public boolean addOrder(OrderBean order);
 //	public boolean addTransaction(TransactionBean transaction);
 	

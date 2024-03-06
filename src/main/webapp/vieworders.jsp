@@ -20,10 +20,7 @@
 	session.setAttribute("currentpage", pagename);
 	FoodUtil.validateCommonPageAccess(request);
 
-	/* boolean isLoggedInAsCustomer = FoodUtil.isLoggedIn(request, Role.CUSTOMER);
-	request.setAttribute("isLoggedInAsCustomer", isLoggedInAsCustomer); */
-	/* User user = FoodUtil.getCurrentUser(request);
-	String userId = user.getUserId(); */
+	
 	OrderService os = new OrderServiceImpl();
 	%>
 	<!--  Include the header to the page -->
